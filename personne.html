@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="script1.js" ></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broconte</title>
+</head>
+<body>
+    <header>
+        <nav>
+            
+            <ul>
+                <li ><a href="broconteur.html" title="broconteur">Broconteur</a></li>
+                <li class="active"><a href="personne.html" title="Personne">Personne</a></li>
+                <li><a href="payement.html" title="payement">payement</a></li>
+                <li><a href="contact.html" title="Contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Personne</h2>
+		<p>Entrez les info du Personne </p>
+        <form name="Personne" action="#" method="post">
+		
+            <div id="form_Personne"></div>
+            <fieldset>
+                <legend></legend>
+                
+                <p><label for="Nom">Nom</label><input required type="text" name="Nom" id="Nom" /></p>
+                <p><label for="prenom">Prénom</label><input required type="text" name="prenom" id="prenom" /></p>
+                <p><label for="tel">Numéro de téléphone</label><input type="tel" name="tel" id="tel" /></p>
+                
+                
+                <p><input class="btn btn-primary" type="submit" value="Saisir" /></p>
+            </fieldset>
+        </form> 
+    </main>
+     
+</body>
+</html>

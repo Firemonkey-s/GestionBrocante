@@ -1,0 +1,147 @@
+/* Initiaiser les marges à zéro */
+body{
+	margin:0;
+	padding:0;
+}
+
+ul{
+	list-style: none; /* suppression des puces */
+	
+}
+nav ul li {
+	display: inline-block; /* chaque élément l'un à côté de l'autre */
+	margin: 0px 15px; /* espacement des éléments */
+	padding : 10px;
+}
+
+
+a{
+	text-decoration: none; /* pas de soulignement */
+	color : #433191; /* couleur */
+}	
+
+
+/* Le texte est aligné dans le header */
+header{
+	text-align:center;
+	position:relative;
+}
+
+/* Taille du logo */
+header > img{
+	width:75%;
+}
+
+/* Titre du site */ 
+header h1{
+	text-transform:uppercase;
+}
+
+
+/* Le menu de navigation est à gauche */
+nav {
+	left:10px;
+}
+
+/* Mise en forme du h2 */
+h2{
+	margin:25px;
+	color:#31914e;
+}
+
+main{
+    margin:0;
+    padding:20px;
+    background-color: #717171;
+}
+
+/* Mise en forme du premier paragraphe */
+body main h2 + p {
+	border : 1px solid #433191;
+	padding:20px;
+	background-color: rgba(145, 49, 102, 0.5);
+	color:#FFF;
+	font-weight:bold;
+}
+
+
+
+
+form p{
+	margin : 12px 0;
+	padding-left:20px;
+}
+
+form label{
+	width:40%;
+	display :inline-block;
+}
+form input[type="text"]{
+	width:75%;
+}
+
+
+iframe{
+	width: 100%;
+    min-height: 500px;
+    border: none;
+}
+
+/***** Responsive *****/
+@media screen and (min-width:768px){
+	header{
+		text-align:left;
+	}
+	header img{
+		width:35%;
+	}
+	header h1{
+		position:absolute;
+		top: 150px;
+		right: 50px;
+	}
+	
+	
+	
+	h2{
+		text-align:center;
+	}
+	
+	form label{
+		width:250px;
+	}
+	
+	form input[type="text"]{
+		width:50%;
+	}
+
+		
+}
+
+@media screen and (min-width:900px){
+	header img{
+		width:25%;
+	}
+	header h1{
+		top: 50px;
+	}
+	nav{
+		right: 50px;
+		top: 120px;
+		left: auto;
+	}
+	
+	
+	body{
+		width:900px;
+		margin:auto;
+	}
+	
+	form label{
+		width:150px;
+	}
+	
+
+	
+	
+}
