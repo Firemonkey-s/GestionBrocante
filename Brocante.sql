@@ -40,6 +40,7 @@ CREATE TABLE Personne(
 CREATE TABLE Brocanteur(
         BrocanteurId            Int NOT NULL ,
         CarteIdentite           Varchar (50) NOT NULL ,
+        Rue                     Varchar (80) NOT NULL ,
         CP                      Varchar (50) NOT NULL ,
         Ville                   Varchar (50) NOT NULL ,
         ReservationEmplacement  Varchar (50) NOT NULL ,
@@ -100,23 +101,5 @@ CREATE TABLE Payement(
 	,CONSTRAINT Payement_Facturation0_FK FOREIGN KEY (FacturationId) REFERENCES Facturation(FacturationId)
 	,CONSTRAINT Payement_Reservation_AK UNIQUE (ReservationId)
 	,CONSTRAINT Payement_Facturation0_AK UNIQUE (FacturationId)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: Emplacement
-#------------------------------------------------------------
-
-CREATE TABLE Emplacement(
-        EmplacementID Int  Auto_increment  NOT NULL
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: GeoLoc
-#------------------------------------------------------------
-
-CREATE TABLE GeoLoc(
-        GeolocID Int  Auto_increment  NOT NULL
 )ENGINE=InnoDB;
 
