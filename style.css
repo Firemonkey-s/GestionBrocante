@@ -35,13 +35,14 @@ body{
 /* --Gestion image de fond  --*/
 .home-inner{
   background-image: url(img/antiques.jpg) ;
+  opacity: rgb(122, 121, 121);
 }
 
 .caption{
   width: 100%;
   max-width: 100%;
   position: absolute;
-  top: 16%;
+  top: 26%;
   z-index: 1 ;
   color: white ;
   text-transform: uppercase;
