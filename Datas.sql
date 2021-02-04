@@ -1,0 +1,13 @@
+delete from personne;
+delete from role;
+INSERT INTO `role` (`RoleId`, `Titre`) VALUES ('1', 'Administrateur');
+INSERT INTO `role` (`RoleId`, `Titre`) VALUES ('2', 'Responsable de Brocante');
+INSERT INTO `role` (`RoleId`, `Titre`) VALUES ('3', 'Secrétaire de Mairie');
+INSERT INTO `role` (`RoleId`, `Titre`) VALUES ('4', 'Responsable de zone');
+INSERT INTO `role` (`RoleId`, `Titre`) VALUES ('5', 'Placeur');
+INSERT INTO `role` (`RoleId`, `Titre`) VALUES ('6', 'Brocanteur');
+INSERT INTO `personne` (`PersonneId`, `Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('1', 'Barth', 'Serge', '0777777777', 'serge.barth@uha.fr', '1');
+INSERT INTO `personne` (`PersonneId`, `Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('2', 'Paul', 'Boccuse', '065555555', 'paul.bocusse@uha.fr', '2');
+INSERT INTO `personne` (`PersonneId`, `Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('3', 'Sieffert', 'Sylvie', '088888888', 'sylvie.sieffert@mairie.kirchheim.fr', '3');
+INSERT INTO `personne` (`PersonneId`, `Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('4', 'Klump','Gilles', '065453727','gilles.klump@free.fr', '4');
+INSERT INTO `personne` (`PersonneId`, `Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('5', 'Dupont','Henri','0745637388','henri.dupont@free.fr', '4');
