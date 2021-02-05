@@ -27,6 +27,35 @@
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
 		}
+
+		public function editRole($objRole){
+			$strReq = "UPDATE role 
+						SET titre = :titre,
+							
+						WHERE roleid = :id";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue(':titre', $objRole->getName(), PDO::PARAM_STR);
+			$prep->bindValue(':id',$objRole->getRoleId(), PDO::PARAM_INT);
+			return $prep->execute();
+		}
+
+		public function addRole($objRole){
+			$strReq = "INSERT INTO role 
+			            (titre)
+						VALUES (:titre)";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue(':titre', $objRole->getName(), PDO::PARAM_STR);
+			$prep->bindValue(':id',$objRole->getRoleId(), PDO::PARAM_INT);
+			return $prep->execute();
+		}
+
+		public function deleteRole($id){
+			$strReq = "DELETE FROM role 
+			            WHERE roleid = :id";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue(':id',$id, PDO::PARAM_INT);
+			return $prep->execute();
+		}
 		
 	}
     
