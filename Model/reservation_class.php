@@ -1,8 +1,8 @@
     <?php 
 	class reservation_class{
 		// Attributs
-		private $ReservationId;
-		private $Date ;
+		private $reservationId;
+		private $date ;
 		private $nombrePlace;
 		private $BrocanteurId;
 		        
@@ -12,44 +12,44 @@
 		}
 		
 		public function hydrate($arrPayement){
-			$this->setReservationId($arrPayement['ReservationId']);		
-			$this->setDate ($arrPayement['Date ']);
+			$this->setReservationId($arrPayement['reservationId']);		
+			$this->setDate ($arrPayement['date ']);
             $this->setnombrePlace($arrPerson[' nombrePlace']);
-            $this->setBrocanteurId($arrPerson['BrocanteurId']);
+            $this->setBrocanteurId($arrPerson['brocanteurId']);
 			
 		}
 		
 		// GETTERS
 		public function getReservationId(){
-			return $this->ReservationId;
+			return $this->reservationId;
 		}
 		
 		public function getDate (){
-            $objDate = new DateTime($this->Date);
+            $objDate = new DateTime($this->date);
 			return $objDate->format("d/m/Y");
                 }
-		public function get nombrePlace(){
-			return $this-> nombrePlace;
+		public function getNombrePlace(){
+			return $this->nombrePlace;
 		}
 		public function getBrocanteurId(){
-			return $this->BrocanteurId;
+			return $this->brocanteurId;
 		}
 		
 		
 		
 		// SETTERS 
 		public function setReservationId($intReservationId){
-			$this->ReservationId = $intReservationId;
+			$this->reservationId = $intReservationId;
 		}
 		             
 		public function setDate ($strDate ){
-			$this->Date  = $strDate ;
+			$this->date  = $strDate ;
 		}
 		public function setnombrePlace($intnombrePlace){
-			$this-> nombrePlace = $int nombrePlace;
+			$this->nombrePlace = $int nombrePlace;
 		}
 		public function setBrocanteurId($intBrocanteurId){
-			$this->BrocanteurId = $intBrocanteurId;
+			$this->brocanteurId = $intBrocanteurId;
 		}
 		
 		

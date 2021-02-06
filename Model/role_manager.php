@@ -7,14 +7,14 @@
 		public function findAll(){
 			// Récupération des roles dans la BDD
 			$strRequete		= "SELECT RoleId,Titre
-								FROM  Rolet ";//Role est un mot clé dans sql? pour ça, on met Rolet
+								FROM  Role ";//Role est un mot clé dans sql? pour ça, on met Rolet
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetchAll();				
 		}
 		
 		public function getRoleId(){
 			$strRequete		= "SELECT roleId,Titre
-								FROM Rolet 
+								FROM Role 
 								WHERE roleId = '".$_POST['roleId']."' ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
@@ -27,7 +27,34 @@
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
 		}
-		
+		public function editRole($objRole){
+			$strReq = "UPDATE role 
+						SET titre = :titre,
+							
+						WHERE roleid = :roleid";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue(':titre', $objRole->getName(), PDO::PARAM_STR);
+			$prep->bindValue(':roleid',$objRole->getRoleId(), PDO::PARAM_INT);
+			return $prep->execute();
+		}
+
+		public function addRole($objRole){
+			$strReq = "INSERT INTO role 
+			            (titre)
+						VALUES (:titre)";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue(':titre', $objRole->getTitre(), PDO::PARAM_STR);
+			$prep->bindValue(':roleid',$objRole->getRoleId(), PDO::PARAM_INT);
+			return $prep->execute();
+		}
+
+		public function deleteRole($roleid){
+			$strReq = "DELETE FROM role 
+			            WHERE roleid = :roleid";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue(':roleid',$roleid, PDO::PARAM_INT);
+			return $prep->execute();
+		}
 	}
     
     
