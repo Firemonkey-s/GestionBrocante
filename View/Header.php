@@ -39,6 +39,10 @@
 
 			<li class="nav-item">
 				<a class="nav-link" href="#Galerie">Galerie</a>
+            </li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="index.php?ctrl=Personnes&action=List">Personnel</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#Evenement">Evenement</a>
@@ -46,4 +50,8 @@
 			
 		</ul>
     </div>
+    </nav>
+   
+    <h1>.</h1>
+    <h1>.</h1>
     <main>

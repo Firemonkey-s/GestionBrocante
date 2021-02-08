@@ -1,8 +1,8 @@
   <?php 
 	class role_class{
 		// Attributs
-		private $RoleId;
-		private $Titre ;
+		private $_roleId;
+		private $_titre ;
 		
 		        
 
@@ -12,29 +12,29 @@
 		
 		public function hydrate($arrRole){
 			$this->setRoleId($arrRole['RoleId']);		
-			$this->setTitre ($arrRole['Titre ']);
+			$this->setTitre ($arrRole['Titre']);
            
 			
 		}
 		
 		// GETTERS
 		public function getRoleId(){
-			return $this->RoleId;
+			return $this->_roleId;
 		}
 		
 		public function getTitre(){
-			return $this->getTitre;
+			return $this->_titre;
 		}
 		
 		
 		
 		// SETTERS 
 		public function setRoleId($intRoleId){
-			$this->RoleId = $intRoleId;
+			$this->_roleId = $intRoleId;
 		}
 		             
-		public function setTitre ($strTitre ){
-			$this->Titre  = $strTitre ;
+		public function setTitre ($strTitre){
+			$this->_titre  = $strTitre ;
 		}
 		
 		

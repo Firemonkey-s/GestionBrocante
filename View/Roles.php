@@ -2,11 +2,9 @@
 <?php 
 foreach ($arrRoles as $arrRole){
                         $objRole = new role_class();
-                        $$objRole	= new Product();
-                        $$objRole->hydrate($arrRole);
-        
-                         ?>
-                          <p>Libelle:<?php echo $objRole->Titre ?><a href="">Modifier</a></p>
+                        $objRole->hydrate($arrRole);
+                  ?>
+                          <p>   Titre : <?php echo $objRole->GetTitre() ?><a href="">  Modifier</a></p>
                         <?php } ?>
 
 

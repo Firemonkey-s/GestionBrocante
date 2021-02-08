@@ -1,64 +1,64 @@
 <?php 
-	class pesonne_class{
+	class personne_class{
 		// Attributs en privé
-		private $PersonneId;
-		private $Nom;
-		private $Prenom;
-		private $Telephone;
-		private $Email;
-		private $RoleId;
+		private $_personneId;
+		private $_nom;
+		private $_prenom;
+		private $_telephone;
+		private $_email;
+		private $_roleId;
 
 		// constructeur
 		public function __construct(){
 		}
 		
-		public function hydrate($arrPesonne){
-			$this->setPersonneId($arrPesonne['PersonneId']);		
-			$this->setNom($arrPesonne['Nom']);
-			$this->setPrenom($arrPesonne['Prenom']);
-			$this->setEmail($arrPerson['Email']);
-			$this->setTelephone($arrPerson['Telephone']);
-			$this->setRoleId($arrPerson['RoleId']);
+		public function hydrate($arrPersonne){
+			$this->setPersonneId($arrPersonne['PersonneId']);		
+			$this->setNom($arrPersonne['Nom']);
+			$this->setPrenom($arrPersonne['Prenom']);
+			$this->setEmail($arrPersonne['Email']);
+			$this->setTelephone($arrPersonne['Telephone']);
+			$this->setRoleId($arrPersonne['RoleId']);
 		}
 		
 		/* GETTERS */
 		public function getPersonneId(){
-			return $this->PersonneId;
+			return $this->_personneId;
 		}
 		public function getNom(){
-			return $this->Nom;
+			return $this->_nom;
 		}
 		public function getPrenom(){
-			return $this->Prenom;
+			return $this->_prenom;
 		}
 		public function getTelephone(){
-			return $this->Telephone;
+			return $this->_telephone;
 		}
 		public function getEmail(){
-			return $this->Email;
+			return $this->_email;
 		}
 		public function getRoleId(){
-			return $this->RoleId;
+			return $this->_roleId;
 		}
 		
 		/* SETTERS */
 		public function setPersonneId($intPersonneId){
-			$this->PersonneId = $intPersonneId;
+			$this->_personneId = $intPersonneId;
 		}
 		public function setNom($strNom){
-			$this->Nom = $strNom;
+			$this->_nom = $strNom;
 		}
 		public function setPrenom($strPrenom){
-			$this->Prenom = $strPrenom;
+			$this->_prenom = $strPrenom;
 		}
 		public function setTelephone($intTelephone){
-			$this->Telephone = $intTelephone;
+			$this->_telephone = $intTelephone;
 		}
 		public function setEmail($strEmail){
-			$this->Email = $strEmail;
+			$this->_email = $strEmail;
 		}
 		public function setRoleId($intRoleId){
-			$this->RoleId = $intRoleId;
+			$this->_roleId = $intRoleId;
 		}	
 		
 		

@@ -12,9 +12,9 @@
 	$strController 	= ucfirst($strController);
 	
 	$boolOk = true;
-	if (file_exists("Controllers/".$strController.".php")){ // Si le fichier existe
+	if (file_exists("Controller/".$strController.".php")){ // Si le fichier existe
 		// inclusion du bon fichier
-		require_once("Controllers/".$strController.".php");
+		require_once("Controller/".$strController.".php");
 		// Je construit le nom de la classe
 		if (class_exists($strController)){ // Si le nom de la classe existe
 			// j'instancie la classe
@@ -36,7 +36,7 @@
 	}
 	
 	if ($boolOk === false){
-		require_once("Controllers/Pages.php");
+		require_once("Controller/Pages.php");
 		$objCtrl = new Pages;
 		$objCtrl->error_404();
 	}
