@@ -84,6 +84,19 @@ body{
     color: #fff;
     cursor: pointer;
     text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.btn1 {
+  background: #353e41;
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  position: left;
 }
 
 @media screen and (max-width: 600px){

@@ -27,4 +27,5 @@
          include("view/Emplacement.php");  
          include("View/Footer.php");
        }
+
     }
