@@ -2,45 +2,83 @@
 	// Fichier de connection à la BDD
 	require_once("manager.php");
 	
-	class personne_manager extends Manager{
+	class personne_manager extends manager{
 		
 		public function findAll(){
-			// Récupération des utilisateurs dans la BDD
-			$strRequete		= "SELECT PersonneId, PersonneId, PersonneId
-								FROM users ";
+			// Récupération des personnes dans la BDD
+			$strRequete		= "SELECT PersonneId, Nom, Pernom,Email,RoleId
+								FROM Personne ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetchAll();				
 		}
 		
 		public function getByMail(){
-			$strRequete		= "SELECT user_id, user_name, user_firstname, user_pwd
-								FROM users 
-								WHERE user_mail = '".$_POST['mail']."' ";
+			$strRequete		= "SELECT PersonneId, Nom, Pernom,Telephone,Email,RoleId
+								FROM Personne 
+								WHERE Email = '".$_POST['mail']."' ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
 		}
 		
 		public function getById(){
-			$strRequete		= "SELECT user_id, user_name, user_firstname, user_mail
-								FROM users 
-								WHERE user_id = '".$_SESSION['user']['user_id']."' ";
+			$strRequete		= "SELECT PersonneId, Nom, Pernom,Telephone,Email,RoleId
+								FROM Personne 
+								WHERE PersonneId = '".$_['personne']['personneId']."' ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
 		}
-		
-		public function updateUser($objUser, $boolPwd){
-			$strRequete		= "UPDATE users 
-								SET user_name = '".$objUser->getName()."',
-									user_firstname = '".$objUser->getFirstname()."',
-									user_mail = '".$objUser->getMail()."'";
+		/*
+		public function updatePersonne($objPersonne, $boolPwd){
+			$strRequete		= "UPDATE Personne 
+								SET Nom = '".$objPersonne->getName()."',
+									Pernom = '".$objPersonne->getPrenom()."',
+									Email = '".$objPersonne->getEmail()."'";
 			if ($boolPwd){
-				$strRequete		.= ", user_pwd = '".$objUser->getPwd()."'";		
+				$strRequete		.= ", Personne_pwd = '".$objPersonne->getPwd()."'";		
 			}				
-			$strRequete		.= " WHERE user_id = '".$_SESSION['user']['user_id']."' ";		
+			$strRequete		.= " WHERE personneid = '".$_SESSION['Personne']['personneid']."' ";		
 
 			return $this->_db->exec($strRequete);
+		} 
+		*/
+		public function editPersonne($objPersonne){
+			$strReq = "UPDATE Personne 
+						SET PersonneId = PersonneId, Nom =:Nom,
+						Prenom=:Prenom, Emai=:Email, RoleId=:RoleId,
+						Telephone=:Telephone	
+						WHERE PersonneId = PersonneId";
+
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue('PersonneId',$objPersonne->getPersonneId(), PDO::PARAM_INT);
+			$prep->bindValue(':Nom', $objPersonne->getNom(), PDO::PARAM_STR);
+			$prep->bindValue(':Prenom',$objPersonne->getPrenom(), PDO::PARAM_STR);
+			$prep->bindValue('Telephone',$objPersonne->getTelephone(), PDO::PARAM_INT);
+			$prep->bindValue(':Email',$objPersonne->getEmail(), PDO::PARAM_STR);
+			$prep->bindValue('RoleId',$objPersonne->getRoleId(), PDO::PARAM_INT);
+			return $prep->execute();
 		}
-		
+
+		public function addPersonne($objPersonne){
+			$strReq = "INSERT INTO Personne 
+			            (PersonneId, Nom, Pernom,Telephone,Email,RoleId)
+						VALUES (:PersonneId, :Nom, :Pernom, :Telephone, :Email, :RoleId)";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue(':PersonneId', $objPersonne->getPersonneId(), PDO::PARAM_INT);
+			$prep->bindValue(':Date',$objPersonne->getDate(), PDO::PARAM_STR);
+			$prep->bindValue(':nombrePlace', $objPersonne->getNombrePlace(), PDO::PARAM_INT);
+			$prep->bindValue(':BrocanteurId', $objPersonne->getPersonneId(), PDO::PARAM_INT);
+			return $prep->execute();
+		}
+
+		public function deletePersonne($id){
+			$strReq = "DELETE FROM Personne 
+			            WHERE Personneid = PersonneId";
+			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep->bindValue('PersonneId',$id, PDO::PARAM_INT);
+			return $prep->execute();
+		}
 	}
+    
+	
     
     
