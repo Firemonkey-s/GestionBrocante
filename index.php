@@ -6,7 +6,7 @@
 	//	$_SESSION['Panier'] = $panier;
 	}
 	
-	$strController 	= $_GET['ctrl']??'Roles';
+	$strController 	= $_GET['ctrl']??'Personnes';
 	$strAction	 	= $_GET['action']??'List';
 
 	$strController 	= ucfirst($strController);
