@@ -4,8 +4,7 @@
     {
         public function __construct()
         {
-            include("model/Role_manager.php");
-            include("model/Role_class.php");
+
         }
         
         public function Index()
