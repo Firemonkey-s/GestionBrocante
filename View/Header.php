@@ -16,7 +16,7 @@
 <!--- navbar section -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"  >
        <a class="navbar-brand" href="#">
-		   <img src="img/logob.jpg" >
+		   <!--img src="img/logob.jpg" -->
 		</a> 
 		<button class="navbar-toggeler" type="button" data-toggle="collapse"
 		data-target="#navbarResponsive"> 
@@ -43,7 +43,22 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#Evenement">Evenement</a>
 			</li>
-			
+			<li class="nav-item">
+				<a class="nav-link" href="Index.php?ctrl=Personnes&action=List">testPersonne</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="Index.php?ctrl=Roles&action=List">testRole</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="Index.php?ctrl=Payements&action=List">testPayments</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="Index.php?ctrl=Reservations&action=List">testReservations</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="Index.php?ctrl=Brocanteurs&action=List">testBrocanteurs</a>
+			</li>
 		</ul>
     </div>
+	</nav>
     <main>

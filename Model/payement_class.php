@@ -1,11 +1,11 @@
         <?php 
-	class payement_class{
+	class Payement_class{
 		// Attributs
-		private $PayementId;
-		private $Montant;
-		private $Date ;
-		private $ModePayement;
-		private $ReservationId;
+		private $_payementId;
+		private $_montant;
+		private $_date ;
+		private $_modePayement;
+		private $_reservationId;
 		        
 
 		// constructeur
@@ -23,40 +23,40 @@
 		
 		// GETTERS
 		public function getPayementId(){
-			return $this->PayementId;
+			return $this->_payementId;
 		}
 		public function getMontant(){
-			return $this->Montant;
+			return $this->_montant;
 		}
 		public function getDate (){
-                        $objDate = new DateTime($this->Date);
+                        $objDate = new DateTime($this->_date);
 			return $objDate->format("d/m/Y");
                 }
 		public function getModePayement(){
-			return $this->ModePayement;
+			return $this->_modePayement;
 		}
 		public function getReservationId(){
-			return $this->ReservationId;
+			return $this->_reservationId;
 		}
 		
 		
 		
 		// SETTERS 
 		public function setPayementId($intPayementId){
-			$this->PayementId = $intPayementId;
+			$this->_payementId = $intPayementId;
 		}
 		public function setMontant($intMontant){
-			$this->Montant = $intMontant;
+			$this->_montant = $intMontant;
                 }
                 
 		public function setDate ($strDate ){
-			$this->Date  = $strDate ;
+			$this->_date  = $strDate ;
 		}
 		public function setModePayement($intModePayement){
-			$this->ModePayement = $intModePayement;
+			$this->_modePayement = $intModePayement;
 		}
 		public function setReservationId($strReservationId){
-			$this->ReservationId = $strReservationId;
+			$this->_reservationId = $strReservationId;
 		}
 		
 		

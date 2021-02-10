@@ -1,15 +1,15 @@
 <?php 
-	class brocanteur_class{
+	class Brocanteur_class{
 		// Attributs en privé
-		private $BrocanteurId;
-		private $CarteIdentite;
-		private $Rue;
-		private $CP;
-		private $Ville;
-		private $ReservationEmplacement;
-		private $MetreLineaire;
-		private  $RCN_;
-		private $PersonneId;
+		private $_brocanteurId;
+		private $_carteIdentite;
+		private $_rue;
+		private $_cP;
+		private $_ville;
+		private $_reservationEmplacement;
+		private $_metreLineaire;
+		private  $_rCN_;
+		private $_personneId;
         
 
 		// constructeur
@@ -30,61 +30,61 @@
 		
 		/* GETTERS */
 		public function getBrocanteurId(){
-			return $this->BrocanteurId;
+			return $this->_brocanteurId;
 		}
 		public function getCarteIdentite(){
-			return $this->CarteIdentite;
+			return $this->_carteIdentite;
 		}
 		public function getRue(){
-			return $this->Rue;
+			return $this->_rue;
 		}
 		public function getCP(){
-			return $this->CP;
+			return $this->_cP;
 		}
 		public function getVille(){
-			return $this->Ville;
+			return $this->_ville;
 		}
 		public function getReservationEmplacement(){
-			return $this->ReservationEmplacement;
+			return $this->_reservationEmplacement;
 		}
 		public function getMetreLineaire(){
-			return $this->MetreLineaire;
+			return $this->_metreLineaire;
 		}
 		public function getRCN_(){
-			return $this->RCN_;
+			return $this->_rCN_;
 		}
 		public function getPersonneId(){
-			return $this->PersonneId;
+			return $this->_personneId;
 		}
 		
 		
 		/* SETTERS */
 		public function setBrocanteurId($intBrocanteurId){
-			$this->BrocanteurId = $intBrocanteurId;
+			$this->_brocanteurId = $intBrocanteurId;
 		}
 		public function setCarteIdentite($strCarteIdentite){
-			$this->CarteIdentite = $strCarteIdentite;
+			$this->_carteIdentite = $strCarteIdentite;
 		}
 		public function setRue($strRue){
-			$this->Rue = $strRue;
+			$this->_rue = $strRue;
 		}
 		public function setCP($intCP){
-			$this->CP = $intCP;
+			$this->_cP = $intCP;
 		}
 		public function setVille($strVille){
-			$this->Ville = $strVille;
+			$this->_ville = $strVille;
 		}
 		public function setReservationEmplacement($strReservationEmplacement){
-			$this->ReservationEmplacement = $strReservationEmplacement;
+			$this->_reservationEmplacement = $strReservationEmplacement;
 		}	
 		public function setMetreLineaire($intMetreLineaire){
-			$this->MetreLineaire=$intMetreLineaire;
+			$this->_metreLineaire=$intMetreLineaire;
 		}
 		public function setRCN_($RNC){
-			$this->RCN_=$RCN_;
+			$this->_rCN_=$RCN_;
 		}
 		public function setPersonneId($PersonneId){
-			$this->PersonneId=$PersonneId;
+			$this->_personneId=$PersonneId;
 		}
 		
 		

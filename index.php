@@ -6,15 +6,16 @@
 	//	$_SESSION['Panier'] = $panier;
 	}
 	
-	$strController 	= $_GET['ctrl']??'Roles';
+	$strController 	= $_GET['ctrl']??'roles';
 	$strAction	 	= $_GET['action']??'List';
 
 	$strController 	= ucfirst($strController);
-	
+	$strAction	= ucfirst($strAction);
+	echo "<p>  $strController  $strAction </p>";
 	$boolOk = true;
-	if (file_exists("Controllers/".$strController.".php")){ // Si le fichier existe
+	if (file_exists("Controller/".$strController.".php")){ // Si le fichier existe
 		// inclusion du bon fichier
-		require_once("Controllers/".$strController.".php");
+		require_once("Controller/".$strController.".php");
 		// Je construit le nom de la classe
 		if (class_exists($strController)){ // Si le nom de la classe existe
 			// j'instancie la classe
@@ -36,7 +37,7 @@
 	}
 	
 	if ($boolOk === false){
-		require_once("Controllers/Pages.php");
+		require("Controller/Pages.php");
 		$objCtrl = new Pages;
 		$objCtrl->error_404();
 	}

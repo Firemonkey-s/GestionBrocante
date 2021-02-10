@@ -1,10 +1,10 @@
     <?php 
-	class reservation_class{
+	class Reservation_class{
 		// Attributs
-		private $reservationId;
-		private $date ;
-		private $nombrePlace;
-		private $BrocanteurId;
+		private $_reservationId;
+		private $_date ;
+		private $_nombrePlace;
+		private $_brocanteurId;
 		        
 
 		// constructeur
@@ -21,35 +21,35 @@
 		
 		// GETTERS
 		public function getReservationId(){
-			return $this->reservationId;
+			return $this->_reservationId;
 		}
 		
 		public function getDate (){
-            $objDate = new DateTime($this->date);
+            $objDate = new DateTime($this->_date);
 			return $objDate->format("d/m/Y");
                 }
 		public function getNombrePlace(){
-			return $this->nombrePlace;
+			return $this->_nombrePlace;
 		}
 		public function getBrocanteurId(){
-			return $this->brocanteurId;
+			return $this->_brocanteurId;
 		}
 		
 		
 		
 		// SETTERS 
 		public function setReservationId($intReservationId){
-			$this->reservationId = $intReservationId;
+			$this->_reservationId = $intReservationId;
 		}
 		             
 		public function setDate ($strDate ){
-			$this->date  = $strDate ;
+			$this->_date  = $strDate ;
 		}
 		public function setnombrePlace($intnombrePlace){
-			$this->nombrePlace = $int nombrePlace;
+			$this->_nombrePlace = $intnombrePlace;
 		}
 		public function setBrocanteurId($intBrocanteurId){
-			$this->brocanteurId = $intBrocanteurId;
+			$this->_brocanteurId = $intBrocanteurId;
 		}
 		
 		

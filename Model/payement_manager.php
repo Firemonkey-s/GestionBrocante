@@ -2,11 +2,11 @@
 	// Fichier de connection à la BDD
     require_once("manager.php");
    	
-	class payement_manager extends manager{ 
+	class Payement_manager extends manager{ 
 		
 		public function findAll(){
 			// Récupération des payements dans la BDD
-			$strRequete		= "SELECT private PayementId, Montant, Date,ModePayement, ReservationId
+			$strRequete		= "SELECT PayementId, Montant, Date,ModePayement, ReservationId
 								FROM Payement ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetchAll();				
@@ -29,16 +29,16 @@
 		}
 		public function editPayement($objPayement){
 			$strReq = "UPDATE Payement 
-						SET PayementId = :PayementId,  Montant=:Montant, Date=:Date,ModePayement=:ModePayment, ReservationId=:ReservationId
-						WHERE PayementId = :PayementId";
+						SET PayementId = :payementId,  Montant=:montant, Date=:date,ModePayement=:modePayment, ReservationId=:reservationId
+						WHERE PayementId = :payementId";
 
-			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep	= $this->_db->prepare($strReq);
 
-			$prep->bindValue(':PayementId',$objPayement->getPayementId(), PDO::PARAM_INT);
-			$prep->bindValue(':Montant', $objPayement->getMontant(), PDO::PARAM_STR);
-			$prep->bindValue(':Date',$objPayement->getDate(), PDO::PARAM_STR);
-			$prep->bindValue(':ModePayement',$objPayement->getModePayement(), PDO::PARAM_INT);
-			$prep->bindValue(':ReservationId',$objPayement->getReservationId(), PDO::PARAM_STR);
+			$prep->bindValue(':payementId',$objPayement->getPayementId(), PDO::PARAM_INT);
+			$prep->bindValue(':montant', $objPayement->getMontant(), PDO::PARAM_STR);
+			$prep->bindValue(':date',$objPayement->getDate(), PDO::PARAM_STR);
+			$prep->bindValue(':modePayement',$objPayement->getModePayement(), PDO::PARAM_INT);
+			$prep->bindValue(':reservationId',$objPayement->getReservationId(), PDO::PARAM_STR);
 			return $prep->execute();
 		}
 
@@ -46,22 +46,22 @@
 			$strReq = "INSERT INTO Payement 
 			            (PayementId, Montant, Date, ModePayement, ReservationId, ReservationEmplacement,
 			 MetreLineaire, RCN_, PersonneId)
-						VALUES (:PayementId, :Montant, :Date, :ModePayement, :ReservationId, :ReservationEmplacement,
+						VALUES (:payementId, :montant, :date, :modePayement, :reservationId, :reservationEmplacement,
 			 :MetreLineaire, :RCN_, :PersonneId)";
 			$prep	= $this->_myDatabase->prepare($strReq);
-			$prep->bindValue(':PayementId', $objPayement->getPayementId(), PDO::PARAM_INT);
-			$prep->bindValue(':Montant', $objPayement->getMontant(), PDO::PARAM_STR);
-			$prep->bindValue(':Date',$objPayement->getDate(), PDO::PARAM_STR);
-			$prep->bindValue(':ModePayement',$objPayement->getModePayement(), PDO::PARAM_INT);
-			$prep->bindValue(':ReservationId',$objPayement->getReservationId(), PDO::PARAM_STR);
+			$prep->bindValue(':payementId', $objPayement->getPayementId(), PDO::PARAM_INT);
+			$prep->bindValue(':montant', $objPayement->getMontant(), PDO::PARAM_STR);
+			$prep->bindValue(':date',$objPayement->getDate(), PDO::PARAM_STR);
+			$prep->bindValue(':modePayement',$objPayement->getModePayement(), PDO::PARAM_INT);
+			$prep->bindValue(':reservationId',$objPayement->getReservationId(), PDO::PARAM_STR);
 			return $prep->execute();
 		}
 
 		public function deletePayement($id){
 			$strReq = "DELETE FROM Payement 
-			            WHERE Payementid = PayementId";
-			$prep	= $this->_myDatabase->prepare($strReq);
-			$prep->bindValue('PayementId',$id, PDO::PARAM_INT);
+			            WHERE Payementid = :payementId";
+			$prep	= $this->_db->prepare($strReq);
+			$prep->bindValue(':payementId',$id, PDO::PARAM_INT);
 			return $prep->execute();
 		}
 	}

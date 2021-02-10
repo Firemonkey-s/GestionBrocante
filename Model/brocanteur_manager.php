@@ -2,7 +2,7 @@
 	// Fichier de connection à la BDD
 	require_once("manager.php");
 	
-	class brocanteur_manager extends manager{
+	class Brocanteur_manager extends manager{
 		
 		public function findAll(){
 			// Récupération des brocanteurs dans la BDD
@@ -26,44 +26,29 @@
 			$strRequete		= "SELECT BrocanteurId, CarteIdentite, Rue, CP, Ville, ReservationEmplacement,
 			MetreLineaire, RCN_, PersonneId
 								FROM Brocanteur 
-								WHERE BrocanteurId = '".$_SESSION['Brocanteur']['BrocanteurId']."' ";
+								WHERE BrocanteurId = '".$_POST['Brocanteur']['BrocanteurId']."' ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
 		}
-		/*
-		public function updateBrocanteur($objBrocanteur, $boolPwd){
-			$strRequete		= "UPDATE Brocanteur
-								SET  CarteIdentite = '".$objBrocanteur->getCarteIdentite()."',
-									Rue = '".$objBrocanteur->getRue()."',
-                                    CP = '".$objBrocanteur->getCP()."',
-                                    Ville = '".$objBrocanteur->getVille()."',
-                                    BrocanteurId = '".$objBrocanteur->getBrocanteurId()."'";
-			if ($boolPwd){
-				$strRequete		.= ", Brocanteur_pwd = '".$objBrocanteur->getPwd()."'";		
-			}				
-			$strRequete		.= " WHERE BrocanteurId = '".$_SESSION['Brocanteur']['BrocanteurId']."' ";		
-
-			return $this->_db->exec($strRequete);
-		}
-		*/
+		
 		public function editBrocanteur($objBrocanteur){
 			$strReq = "UPDATE Brocanteur 
-						SET BrocanteurId = :BrocanteurId, CarteIdentite=:CarteIdentite, Rue=:Rue, CP=:CP,
-						Ville=:Ville, ReservationEmplacement=:ReservationEmplacement,
-						MetreLineaire=:MetreLineaire, RCN_=:RCN_,PersonneId=:PersonneId
-						WHERE BrocanteurId = :BrocanteurId";
+						SET BrocanteurId = :brocanteurId, CarteIdentite=:carteIdentite, Rue=:rue, CP=:cP,
+						Ville=:ville, ReservationEmplacement=:reservationEmplacement,
+						MetreLineaire=:metreLineaire, RCN_=:rCN_,PersonneId=:personneId
+						WHERE BrocanteurId = :brocanteurId";
 
-			$prep	= $this->_myDatabase->prepare($strReq);
+			$prep	= $this->_db->prepare($strReq);
 
-			$prep->bindValue(':BrocanteurId',$objBrocanteur->getBrocanteurId(), PDO::PARAM_INT);
-			$prep->bindValue(':CarteIdentite', $objBrocanteur->getCarteIdentite(), PDO::PARAM_STR);
-			$prep->bindValue(':Rue',$objBrocanteur->getRue(), PDO::PARAM_STR);
-			$prep->bindValue(':CP',$objBrocanteur->getCP(), PDO::PARAM_INT);
-			$prep->bindValue(':Ville',$objBrocanteur->getVille(), PDO::PARAM_STR);
-			$prep->bindValue(':ReservationEmplacement',$objBrocanteur->getReservationEmplacement(), PDO::PARAM_STR);
-			$prep->bindValue(':MetreLineaire',$objBrocanteur->getMetreLineaire(), PDO::PARAM_INT);
-			$prep->bindValue(':RCN_', $objBrocanteur->getRCN_(), PDO::PARAM_STR);
-			$prep->bindValue(':PersonneId',$objBrocanteur->getPersonneId(), PDO::PARAM_INT);
+			$prep->bindValue(':brocanteurId',$objBrocanteur->getBrocanteurId(), PDO::PARAM_INT);
+			$prep->bindValue(':carteIdentite', $objBrocanteur->getCarteIdentite(), PDO::PARAM_STR);
+			$prep->bindValue(':rue',$objBrocanteur->getRue(), PDO::PARAM_STR);
+			$prep->bindValue(':cP',$objBrocanteur->getCP(), PDO::PARAM_INT);
+			$prep->bindValue(':ville',$objBrocanteur->getVille(), PDO::PARAM_STR);
+			$prep->bindValue(':reservationEmplacement',$objBrocanteur->getReservationEmplacement(), PDO::PARAM_STR);
+			$prep->bindValue(':metreLineaire',$objBrocanteur->getMetreLineaire(), PDO::PARAM_INT);
+			$prep->bindValue(':rCN_', $objBrocanteur->getRCN_(), PDO::PARAM_STR);
+			$prep->bindValue(':personneId',$objBrocanteur->getPersonneId(), PDO::PARAM_INT);
 			return $prep->execute();
 		}
 
@@ -71,26 +56,26 @@
 			$strReq = "INSERT INTO Brocanteur 
 			            (BrocanteurId, CarteIdentite, Rue, CP, Ville, ReservationEmplacement,
 			 MetreLineaire, RCN_, PersonneId)
-						VALUES (:BrocanteurId, :CarteIdentite, :Rue, :CP, :Ville, :ReservationEmplacement,
-			 :MetreLineaire, :RCN_, :PersonneId)";
+						VALUES (:brocanteurId, :carteIdentite, :rue, :cP, :ville, :reservationEmplacement,
+			 :metreLineaire, :rCN_, :personneId)";
 			$prep	= $this->_myDatabase->prepare($strReq);
-			$prep->bindValue(':BrocanteurId', $objBrocanteur->getBrocanteurId(), PDO::PARAM_INT);
-			$prep->bindValue(':CarteIdentite', $objBrocanteur->getCarteIdentite(), PDO::PARAM_STR);
-			$prep->bindValue(':Rue',$objBrocanteur->getRue(), PDO::PARAM_STR);
-			$prep->bindValue(':CP',$objBrocanteur->getCP(), PDO::PARAM_INT);
-			$prep->bindValue(':Ville',$objBrocanteur->getVille(), PDO::PARAM_STR);
-			$prep->bindValue(':ReservationEmplacement',$objBrocanteur->getReservationEmplacement(), PDO::PARAM_STR);
-			$prep->bindValue(':MetreLineaire',$objBrocanteur->getMetreLineaire(), PDO::PARAM_INT);
-			$prep->bindValue(':RCN_', $objBrocanteur->getRCN_(), PDO::PARAM_STR);
-			$prep->bindValue(':PersonneId',$objBrocanteur->getPersonneId(), PDO::PARAM_INT);
+			$prep->bindValue(':brocanteurId', $objBrocanteur->getBrocanteurId(), PDO::PARAM_INT);
+			$prep->bindValue(':carteIdentite', $objBrocanteur->getCarteIdentite(), PDO::PARAM_STR);
+			$prep->bindValue(':rue',$objBrocanteur->getRue(), PDO::PARAM_STR);
+			$prep->bindValue(':cP',$objBrocanteur->getCP(), PDO::PARAM_INT);
+			$prep->bindValue(':ville',$objBrocanteur->getVille(), PDO::PARAM_STR);
+			$prep->bindValue(':reservationEmplacement',$objBrocanteur->getReservationEmplacement(), PDO::PARAM_STR);
+			$prep->bindValue(':metreLineaire',$objBrocanteur->getMetreLineaire(), PDO::PARAM_INT);
+			$prep->bindValue(':rCN_', $objBrocanteur->getRCN_(), PDO::PARAM_STR);
+			$prep->bindValue(':personneId',$objBrocanteur->getPersonneId(), PDO::PARAM_INT);
 			return $prep->execute();
 		}
 
 		public function deleteBrocanteur($BrocanteurId){
 			$strReq = "DELETE FROM Brocanteur 
-			            WHERE Brocanteurid = :BrocanteurId";
+			            WHERE Brocanteurid = :brocanteurId";
 			$prep	= $this->_myDatabase->prepare($strReq);
-			$prep->bindValue('BrocanteurId',$BrocanteurId, PDO::PARAM_INT);
+			$prep->bindValue(':brocanteurId',$BrocanteurId, PDO::PARAM_INT);
 			return $prep->execute();
 		}
 	}

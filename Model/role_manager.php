@@ -7,14 +7,14 @@
 		public function findAll(){
 			// Récupération des roles dans la BDD
 			$strRequete		= "SELECT RoleId,Titre
-								FROM  Rolet ";//Role est un mot clé dans sql? pour ça, on met Rolet
+								FROM  Role ";//Role est un mot clé dans sql? pour ça, on met Rolet
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetchAll();				
 		}
 		
 		public function getRoleId(){
 			$strRequete		= "SELECT roleId,Titre
-								FROM Rolet 
+								FROM Role 
 								WHERE roleId = '".$_POST['roleId']."' ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
@@ -23,7 +23,7 @@
 		public function getByTitre(){
 			$strRequete		= "SELECT roleId,Titre
 
-								WHERE Titre= '".$_SESSION['rolet']['Titre']."' ";
+								WHERE Titre= '".$_SESSION['role']['Titre']."' ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
 		}

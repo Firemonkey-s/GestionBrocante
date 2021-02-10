@@ -6,14 +6,14 @@
 		
 		public function findAll(){
 			// Récupération des personnes dans la BDD
-			$strRequete		= "SELECT PersonneId, Nom, Pernom,Email,RoleId
+			$strRequete		= "SELECT PersonneId, Nom, Prenom,Telephone,Email,RoleId
 								FROM Personne ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetchAll();				
 		}
 		
 		public function getByMail(){
-			$strRequete		= "SELECT PersonneId, Nom, Pernom,Telephone,Email,RoleId
+			$strRequete		= "SELECT PersonneId, Nom, Prenom,Telephone,Telephone,Email,RoleId
 								FROM Personne 
 								WHERE Email = '".$_POST['mail']."' ";
 			$requete 		= $this->_db->query($strRequete);
@@ -21,64 +21,49 @@
 		}
 		
 		public function getById(){
-			$strRequete		= "SELECT PersonneId, Nom, Pernom,Telephone,Email,RoleId
+			$strRequete		= "SELECT PersonneId, Nom, Prenom,Telephone,Telephone,Email,RoleId
 								FROM Personne 
-								WHERE PersonneId = '".$_['personne']['personneId']."' ";
+								WHERE PersonneId = '".$_POST['personne']['personneId']."' ";
 			$requete 		= $this->_db->query($strRequete);
 			return $requete->fetch();
 		}
-		/*
-		public function updatePersonne($objPersonne, $boolPwd){
-			$strRequete		= "UPDATE Personne 
-								SET Nom = '".$objPersonne->getName()."',
-									Pernom = '".$objPersonne->getPrenom()."',
-									Email = '".$objPersonne->getEmail()."'";
-			if ($boolPwd){
-				$strRequete		.= ", Personne_pwd = '".$objPersonne->getPwd()."'";		
-			}				
-			$strRequete		.= " WHERE personneid = '".$_SESSION['Personne']['personneid']."' ";		
-
-			return $this->_db->exec($strRequete);
-		} 
-		*/
+		
 		public function editPersonne($objPersonne){
 			$strReq = "UPDATE Personne 
-						SET PersonneId = PersonneId, Nom =:Nom,
-						Prenom=:Prenom, Emai=:Email, RoleId=:RoleId,
-						Telephone=:Telephone	
-						WHERE PersonneId = PersonneId";
+						SET Nom =:nom,
+						Prenom=:prenom, Emai=:email, RoleId=:roleId,
+						Telephone=:telephone	
+						WHERE PersonneId = :personneId";
 
-			$prep	= $this->_myDatabase->prepare($strReq);
-			$prep->bindValue('PersonneId',$objPersonne->getPersonneId(), PDO::PARAM_INT);
-			$prep->bindValue(':Nom', $objPersonne->getNom(), PDO::PARAM_STR);
-			$prep->bindValue(':Prenom',$objPersonne->getPrenom(), PDO::PARAM_STR);
-			$prep->bindValue('Telephone',$objPersonne->getTelephone(), PDO::PARAM_INT);
-			$prep->bindValue(':Email',$objPersonne->getEmail(), PDO::PARAM_STR);
-			$prep->bindValue('RoleId',$objPersonne->getRoleId(), PDO::PARAM_INT);
+			$prep	= $this->_db->prepare($strReq);
+			$prep->bindValue(':personneId',$objPersonne->getPersonneId(), PDO::PARAM_INT);
+			$prep->bindValue(':nom', $objPersonne->getNom(), PDO::PARAM_STR);
+			$prep->bindValue(':prenom',$objPersonne->getPrenom(), PDO::PARAM_STR);
+			$prep->bindValue(':telephone',$objPersonne->getTelephone(), PDO::PARAM_INT);
+			$prep->bindValue(':email',$objPersonne->getEmail(), PDO::PARAM_STR);
+			$prep->bindValue(':roleId',$objPersonne->getRoleId(), PDO::PARAM_INT);
 			return $prep->execute();
 		}
 
 		public function addPersonne($objPersonne){
 			$strReq = "INSERT INTO Personne 
-			            (PersonneId, Nom, Pernom,Telephone,Email,RoleId)
-						VALUES (:PersonneId, :Nom, :Pernom, :Telephone, :Email, :RoleId)";
-			$prep	= $this->_myDatabase->prepare($strReq);
-			$prep->bindValue(':PersonneId', $objPersonne->getPersonneId(), PDO::PARAM_INT);
-			$prep->bindValue(':Date',$objPersonne->getDate(), PDO::PARAM_STR);
-			$prep->bindValue(':nombrePlace', $objPersonne->getNombrePlace(), PDO::PARAM_INT);
-			$prep->bindValue(':BrocanteurId', $objPersonne->getPersonneId(), PDO::PARAM_INT);
+			            (Nom, Prenom,Telephone,Email,RoleId)
+						VALUES (:nom, :prenom,:telephone, :email, :roleId)";
+			$prep	= $this->_db->prepare($strReq);	
+			$prep->bindValue(':nom',$objPersonne->getNom(), PDO::PARAM_STR);
+			$prep->bindValue(':prenom',$objPersonne->getPrenom(), PDO::PARAM_STR);
+			$prep->bindValue(':telephone',$objPersonne->getTelephone(), PDO::PARAM_INT);
+			$prep->bindValue(':email',$objPersonne->getEmail(), PDO::PARAM_STR);
+			$prep->bindValue(':roleId',$objPersonne->getRoleId(), PDO::PARAM_INT);
 			return $prep->execute();
 		}
 
 		public function deletePersonne($id){
 			$strReq = "DELETE FROM Personne 
-			            WHERE Personneid = PersonneId";
-			$prep	= $this->_myDatabase->prepare($strReq);
-			$prep->bindValue('PersonneId',$id, PDO::PARAM_INT);
+			            WHERE PersonneId = :personneId";
+			$prep	= $this->_db->prepare($strReq);
+			$prep->bindValue(':personneId',$id, PDO::PARAM_INT);
 			return $prep->execute();
 		}
 	}
-    
-	
-    
     
