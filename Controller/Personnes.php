@@ -1,3 +1,4 @@
+
 <?php
 
     class Personnes
@@ -6,6 +7,8 @@
         {
             include("model/Personne_manager.php");
             include("model/Personne_class.php");
+
+
 
         }
         
@@ -17,26 +20,46 @@
             include("view/Personnes.php");  
             include("View/Footer.php");
         }
-        public function addPersonne()
-        {   
-            include("model/role_manager.php");
-            include("model/role_class.php");
-            $PersonnesManager = new Personne_manager();
-            $RolesManager = new Role_manager();
-                if (count($_POST) >0){
-                    $objPersonne = new Personne_class();
-                    $objPersonne->hydrate($_POST);
-                    $boolEdit=$PersonnesManager->addPersonne($objPersonne);
-                    header ('Location:index.php?ctrl=Personnes&action=List');
 
+        public function AddPersonne()
+        {   
+            include("model/Role_manager.php");
+            include("model/Role_class.php");
+
+            $PersonnesManager = new Personne_manager();
+
+			if (count($_POST) > 0){
+                $objPerson = new personne_class();
+				$objPerson->hydrate($_POST);
+                $boolEdit = $PersonnesManager->addPersonne($objPerson);
+                header("Location:index.php?ctrl=Personnes&action=List");
                 }
-                $arrRoles=$RolesManager->findAll();
-                
-           
-            
-            include("View/Header.php");
-            include("View/addPersonne.php");  
+            $RoleManager = new Role_manager();
+            $arrRoles = $RoleManager->findAll();
+            include("view/Header.php");
+            include("view/AddPerson.php");  
             include("View/Footer.php");
+
         }
-        
+
+        public function UpdatePersonne()
+        {   
+            include("model/Role_manager.php");
+            include("model/Role_class.php");
+
+            $PersonnesManager = new Personne_manager();
+
+			if (count($_POST) > 0){
+                $objPerson = new personne_class();
+				$objPerson->hydrate($_POST);
+                $boolEdit = $PersonnesManager->editPersonne($objPerson);
+                header("Location:index.php?ctrl=Personnes&action=List");
+                }
+            $RoleManager = new Role_manager();
+            $arrRoles = $RoleManager->findAll();
+            include("view/Header.php");
+            include("view/AddPerson.php");  
+            include("View/Footer.php");
+
+        }
     }

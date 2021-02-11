@@ -1,5 +1,4 @@
-<?php
-	// Fichier de connection à la BDD
+<?php	// Fichier de connection à la BDD
     require_once("manager.php");
     	
 	class role_manager extends manager{ 
@@ -31,8 +30,7 @@
 		public function editRole($objRole){
 			$strReq = "UPDATE role 
 						SET titre = :titre,
-							
-						WHERE roleid = :id";
+                		WHERE roleid = :id";
 			$prep	= $this->_myDatabase->prepare($strReq);
 			$prep->bindValue(':titre', $objRole->getName(), PDO::PARAM_STR);
 			$prep->bindValue(':id',$objRole->getRoleId(), PDO::PARAM_INT);
@@ -58,5 +56,3 @@
 		}
 		
 	}
-    
-    

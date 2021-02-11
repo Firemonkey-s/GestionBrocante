@@ -6,8 +6,13 @@
 	//	$_SESSION['Panier'] = $panier;
 	}
 	
+//<<<<<<< HEAD
 	$strController 	= $_GET['ctrl']??'roles';
 	$strAction	 	= $_GET['action']??'List';
+//=======
+	$strController 	= $_GET['ctrl']??'home';
+	$strAction	 	= $_GET['action']??'Index';
+//>>>>>>> a346f08e6f180000ec5944bf089ec939af95ab1f
 
 	$strController 	= ucfirst($strController);
 	$strAction	= ucfirst($strAction);
@@ -37,7 +42,11 @@
 	}
 	
 	if ($boolOk === false){
+//<<<<<<< HEAD
 		require("Controller/Pages.php");
+//=======
+		require_once("Controller/Pages.php");
+//>>>>>>> a346f08e6f180000ec5944bf089ec939af95ab1f
 		$objCtrl = new Pages;
 		$objCtrl->error_404();
 	}

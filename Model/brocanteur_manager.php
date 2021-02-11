@@ -6,7 +6,7 @@
 		
 		public function findAll(){
 			// Récupération des brocanteurs dans la BDD
-			$strRequete		= "SELECT private BrocanteurId, CarteIdentite, Rue, CP, Ville, ReservationEmplacement,
+			$strRequete		= "SELECT BrocanteurId, CarteIdentite, Rue, CP, Ville, ReservationEmplacement,
 			 MetreLineaire, RCN_, PersonneId
 								FROM Brocanteur ";
 			$requete 		= $this->_db->query($strRequete);
@@ -22,14 +22,7 @@
 			return $requete->fetch();
 		}
 		
-		public function getByBrocanteurId(){
-			$strRequete		= "SELECT BrocanteurId, CarteIdentite, Rue, CP, Ville, ReservationEmplacement,
-			MetreLineaire, RCN_, PersonneId
-								FROM Brocanteur 
-								WHERE BrocanteurId = '".$_POST['Brocanteur']['BrocanteurId']."' ";
-			$requete 		= $this->_db->query($strRequete);
-			return $requete->fetch();
-		}
+		
 		
 		public function editBrocanteur($objBrocanteur){
 			$strReq = "UPDATE Brocanteur 

@@ -1,0 +1,94 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost
+-- Généré le :  lun. 08 fév. 2021 à 16:43
+-- Version du serveur :  10.3.21-MariaDB
+-- Version de PHP :  7.2.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `brocante_osm2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Emplacement`
+--
+
+CREATE TABLE `Emplacement` (
+  `id` tinyint(3) UNSIGNED NOT NULL,
+  `nom` varchar(30) NOT NULL,
+  `zone` int(11) DEFAULT NULL,
+  `lat` text DEFAULT NULL,
+  `lon` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `Emplacement`
+--
+
+INSERT INTO `Emplacement` (`id`, `nom`, `zone`, `lat`, `lon`) VALUES
+(1, 'KIRCHHEIM Mairie', 0, '48.609550675531295', '7.496463060379029'),
+(2, 'Entre 1', 0, '48.61719362882016', '7.50194549560547'),
+(3, 'Entre 2', 0, '48.60778784416136', '7.493737936019898'),
+(4, 'Entre 3', 0, '48.60691527306896', '7.496350407600404'),
+(5, 'Entre Nord', 2, '48.61201215198733', '7.497476935386659'),
+(6, 'Toilette', 3, '48.609540034882684', '7.49645233154297'),
+(7, 'Entre SUD', 2, '48.607527729591126', '7.493391036550748'),
+(8, 'Entre SUD', 2, '48.60761758757111', '7.493362426757813'),
+(9, 'Entre SUD', 2, '48.61217175366695', '7.507331371307374'),
+(10, 'Mac-Do', 6, '48.61355520220492', '7.502728700637818'),
+(11, 'Mac-Do', 6, '48.61227868794027', '7.502814531326295'),
+(12, 'Entee SUD 2', 2, '48.60655867998219', '7.496637403964997'),
+(13, 'test', 2, '48.608660425089454', '7.496405346071696'),
+(14, 'test', 2, '48.609248903660834', '7.5002578438048015'),
+(15, '1619', 2, '48.60868346805408', '7.495378981138534'),
+(16, '1621', 2, '48.61143436796422', '7.497180160723254'),
+(17, '1621', 2, '48.609817877927334', '7.495797112113538'),
+(18, '1622', 2, '48.60897416301263', '7.49591504649112'),
+(19, '1623', 2, '48.61146272697665', '7.495593407279577'),
+(20, '1638', 2, '48.60984582835801', '7.497732029918277'),
+(21, '1638', 2, '48.60969502073551', '7.497648871534298'),
+(22, '1939', 1, '48.610058978787315', '7.496825476818809'),
+(23, '1939', 1, '48.61072784669605', '7.498781040106751'),
+(24, 'Ritti', 6, '48.61122610798023', '7.495830059051515'),
+(25, 'Ritti', 6, '48.609665773801886', '7.498608827590943'),
+(26, 'Ritti', 6, '48.610336789329615', '7.4988019466400155');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `Emplacement`
+--
+ALTER TABLE `Emplacement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `Emplacement`
+--
+ALTER TABLE `Emplacement`
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,64 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>La Page Accueil </title>
-	<link rel="stylesheet" href="bootstrap-4.1.3-dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="css/fixed.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Brocante</title>
 </head>
-
-<body data-spy = "scroll" data-target ="#navbarResponsive">
-
-<!--- home section   section -->
-<div id="home">
-<!--- navbar section -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"  >
-       <a class="navbar-brand" href="#">
-		   <!--img src="img/logob.jpg" -->
-		</a> 
-		<button class="navbar-toggeler" type="button" data-toggle="collapse"
-		data-target="#navbarResponsive"> 
-		<span class="navbar-toggeler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarResponsive">
-		<ul class="navbar-nav ml-auto">
+<body>
+  <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero"><h1><span>KIR</span>CH <span>HE</span>IM</h1></a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger"><div class="bar"></div></div>
+          <ul>
+            <li><a href="#hero" data-after="Accueil">Accueil</a></li>
+            <li><a href="#about" data-after="About">A Propos</a></li>
+            <li><a href="#contact" data-after="Contact">Contact</a></li>
+            <li><a href="#services" data-after="Service">Services</a></li>
+            <li><a href="grid-gallery.html" data-after="Galeries">Gallerie</a></li>
 			<li class="nav-item">
-				<a class="nav-link" href="#Accueil">Accueil</a>
+				<a class="nav-link" href="index.php?ctrl=Personnes&action=List">Personnel</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#About">About</a>
+				<a class="nav-link" href="index.php?ctrl=Brocanteurs&action=List">Brocanteurs</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#Inscription">Inscription</a>
+				<a class="nav-link" href="index.php?ctrl=Payements&action=List">Payements</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="Contact.html">Contact</a>
+				<a class="nav-link" href="index.php?ctrl=Reservations&action=List">Reservationts</a>
 			</li>
-
-			<li class="nav-item">
-				<a class="nav-link" href="#Galerie">Galerie</a>
-			</li>
+			
 			<li class="nav-item">
 				<a class="nav-link" href="#Evenement">Evenement</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="Index.php?ctrl=Personnes&action=List">testPersonne</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="Index.php?ctrl=Roles&action=List">testRole</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="Index.php?ctrl=Payements&action=List">testPayments</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="Index.php?ctrl=Reservations&action=List">testReservations</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="Index.php?ctrl=Brocanteurs&action=List">testBrocanteurs</a>
-			</li>
-		</ul>
+          </ul>
+        </div>
+      </div>
     </div>
-	</nav>
-    <main>
+  </section>
+  <main>

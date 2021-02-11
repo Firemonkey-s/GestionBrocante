@@ -39,4 +39,24 @@
             include("View/addPayement.php");  
             include("View/Footer.php");
         }
+        public function UpdatePayement()
+        {   
+            include("model/Reservation_manager.php");
+            include("model/Reservation_class.php");
+
+            $PayementsManager = new Payement_manager();
+
+			if (count($_POST) > 0){
+                $objPerson = new Payement_class();
+				$objPerson->hydrate($_POST);
+                $boolEdit = $PayementsManager->editPayement($objPerson);
+                header("Location:index.php?ctrl=Payements&action=List");
+                }
+            $ReservationManager = new Reservation_manager();
+            $arrReservations = $ReservationManager->findAll();
+            include("view/Header.php");
+            include("view/updatepayement.php");  
+            include("View/Footer.php");
+
+        }
     }

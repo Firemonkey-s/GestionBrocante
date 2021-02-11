@@ -13,7 +13,7 @@
 		}
 		
 		public function hydrate($arrPersonne){
-			//$this->setPersonneId($arrPersonne['PersonneId']);		
+			$this->setPersonneId($arrPersonne['PersonneId']);		
 			$this->setNom($arrPersonne['Nom']);
 			$this->setPrenom($arrPersonne['Prenom']);
 			$this->setEmail($arrPersonne['Email']);
