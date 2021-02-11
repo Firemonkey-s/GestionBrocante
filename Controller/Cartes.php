@@ -14,7 +14,7 @@
             $RolesManager = new Role_manager();
             $arrRoles = $RolesManager->findAll();
             include("view/Header.php");
-            include("view/Localisation.php");  
+            include("view/Emplacement.php");  
             include("View/Footer.php");
         }
 
@@ -24,7 +24,7 @@
          $RolesManager = new Role_manager();
          $arrRoles = $RolesManager->findAll();
          include("view/Header.php");
-         include("view/Emplacement.php");  
+         include("view/Localisation.php");  
          include("View/Footer.php");
        }
 

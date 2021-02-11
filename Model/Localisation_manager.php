@@ -1,8 +1,8 @@
 <?php
-class Emplacement{
+class Localisation_manager{
     // Connexion
     private $connexion;
-    private $table = "Emplacement";
+    private $table = "Geolocalisation";
 
     // object properties
     public $id;
@@ -117,7 +117,7 @@ class Emplacement{
         $query->bindParam(":lon", htmlspecialchars(strip_tags($this->lon)));
        
         //var_dump($query); 
-        var_dump($this->id); 
+        //var_dump($this->id); 
              
         // On exécute
         if($query->execute()){

@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `Emplacement`
 --
 
-CREATE TABLE `Emplacement` (
+CREATE TABLE `Geolocalisation` (
   `id` tinyint(3) UNSIGNED NOT NULL,
   `nom` varchar(30) NOT NULL,
   `zone` int(11) DEFAULT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `Emplacement` (
 -- Déchargement des données de la table `Emplacement`
 --
 
-INSERT INTO `Emplacement` (`id`, `nom`, `zone`, `lat`, `lon`) VALUES
+INSERT INTO `Geolocalisation` (`id`, `nom`, `zone`, `lat`, `lon`) VALUES
 (1, 'KIRCHHEIM Mairie', 0, '48.609550675531295', '7.496463060379029'),
 (2, 'Entre 1', 0, '48.61719362882016', '7.50194549560547'),
 (3, 'Entre 2', 0, '48.60778784416136', '7.493737936019898'),
@@ -75,7 +75,7 @@ INSERT INTO `Emplacement` (`id`, `nom`, `zone`, `lat`, `lon`) VALUES
 --
 -- Index pour la table `Emplacement`
 --
-ALTER TABLE `Emplacement`
+ALTER TABLE `Geolocalisation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -85,7 +85,7 @@ ALTER TABLE `Emplacement`
 --
 -- AUTO_INCREMENT pour la table `Emplacement`
 --
-ALTER TABLE `Emplacement`
+ALTER TABLE `Geolocalisation`
   MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 

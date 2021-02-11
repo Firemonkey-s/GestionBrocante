@@ -1,5 +1,5 @@
 <?php
-class Emplacement{
+class Localisation{
     // Connexion
     private $connexion;
     private $table = "Emplacement";

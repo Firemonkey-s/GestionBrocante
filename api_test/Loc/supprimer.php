@@ -9,15 +9,17 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // On vérifie la méthode
 if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     // On inclut les fichiers de configuration et d'accès aux données
-    include_once './config/Database.php';
-    include_once './models/Emplacement.php';
+    //include_once './config/Database.php';
+    //include_once './models/Emplacement.php';
+    include_once './../models/manager.php';
+    include_once './../models/Localisation_manager.php';
 
     // On instancie la base de données
-    $database = new Database();
+    $manager = new Manager();
     $db = $database->getConnection();
 
     // On instancie les Emplacement
-    $emplacement = new Emplacement($db);
+    $loc_mgr = new Localisation_manager($db);
 
     // On récupère les informations envoyées
     $donnees = json_decode(file_get_contents("php://input"));
@@ -25,9 +27,9 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
 
    if(!empty($donnees->id))
    {
-    $emplacement->id = $donnees->id;
+    $Loc_mgr->id = $donnees->id;
     
-    if($emplacement->supprimer()){
+    if($Loc_mgr->supprimer()){
         // Ici la création a fonctionné
         // On envoie un code 201
         http_response_code(201);

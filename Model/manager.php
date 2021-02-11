@@ -21,4 +21,9 @@
 				echo "Échec : " . $e->getMessage(); 
 			}
 		}
+
+		    // getter pour la connexion
+			public function getConnection(){
+				return $this->_db;
+			}   
 	}

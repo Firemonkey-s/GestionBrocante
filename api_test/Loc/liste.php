@@ -9,18 +9,20 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // On vérifie que la méthode utilisée est correcte
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
     // On inclut les fichiers de configuration et d'accès aux données
-    include_once './config/Database.php';
-    include_once './models/Emplacement.php';
+    //include_once './config/Database.php';
+    //include_once './models/Emplacement.php';
+    include_once './../models/manager.php';
+    include_once './../models/Localisation_manager.php';
 
     // On instancie la base de données
-    $database = new Database();
+    $manager = new Manager();
     $db = $database->getConnection();
 
     // On instancie les Emplacement
-    $emplacement = new Emplacement($db);
+    $loc_mgr = new Localisation_manager($db);
 
     // On récupère les données
-    $stmt = $emplacement->lire();
+    $stmt = $Loc_mgr->lire();
 
     // On vérifie si on a au moins 1 agence
     if($stmt->rowCount() > 0){
