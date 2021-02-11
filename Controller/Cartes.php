@@ -11,11 +11,15 @@
         // Gilles
         public function EditerEmplacement()
         {   
-            $RolesManager = new Role_manager();
-            $arrRoles = $RolesManager->findAll();
-            include("view/Header.php");
+		/*
+            require("model/emplacement_manager.php");
+	
+			$objEmplacementManager	= new Emplacement_manager;
+			$arrEmplacements 		= $objEmplacementManager->FindAll();
+*/
+            //include("view/Header.php");
             include("view/Emplacement.php");  
-            include("View/Footer.php");
+            //include("View/Footer.php");
         }
 
        // Jean Philippes
