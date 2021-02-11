@@ -9,15 +9,17 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // On vérifie que la méthode utilisée est correcte
 if($_SERVER['REQUEST_METHOD'] == 'PUT'){
     // On inclut les fichiers de configuration et d'accès aux données
-    include_once './config/Database.php';
-    include_once './models/Emplacement.php';
+    //include_once './config/Database.php';
+    //include_once './models/Emplacement.php';
+    include_once './../models/manager.php';
+    include_once './../models/Localisation_manager.php';
 
     // On instancie la base de données
-    $database = new Database();
+    $manager = new Manager();
     $db = $database->getConnection();
 
     // On instancie les Emplacement
-    $emplacement = new Emplacement($db);
+    $loc_mgr = new Localisation_manager($db);
 
    // On récupère les informations envoyées
    $donnees = json_decode(file_get_contents("php://input"));
@@ -26,14 +28,14 @@ if($_SERVER['REQUEST_METHOD'] == 'PUT'){
    if(!empty($donnees->id) && !empty($donnees->nom) && !empty($donnees->zone) && !empty($donnees->lat) && !empty($donnees->lon)){
     // Ici on a reçu les données
     // On hydrate notre objet
-    $emplacement->id = $donnees->id;
-    $emplacement->nom = $donnees->nom;
-    $emplacement->zone = $donnees->zone;
-    $emplacement->lat = $donnees->lat;
-    $emplacement->lon = $donnees->lon;
-    //var_dump($emplacement); 
+    $Loc_mgr->id = $donnees->id;
+    $Loc_mgr->nom = $donnees->nom;
+    $Loc_mgr->zone = $donnees->zone;
+    $Loc_mgr->lat = $donnees->lat;
+    $Loc_mgr->lon = $donnees->lon;
+    //var_dump($Loc_mgr); 
    
-    if($emplacement->modifier()){
+    if($Loc_mgr->modifier()){
         // Ici la modification a fonctionné
         // On envoie un code 200
         http_response_code(200);

@@ -1,0 +1,7 @@
+<?php
+ require("emplacement_manager.php");
+	
+			$objEmplacementManager	= new Emplacement_manager;
+			$arrEmplacements 		= $objEmplacementManager->FindAll();
+			
+?>

@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <br>
 <br>
 <br>
@@ -9,6 +10,14 @@
 
 <a class="nav-link" href="Index.php?ctrl=Personnes&action=addPersonne">nouveau</a>
 
+=======
+</br></br></br></br></br></br></br></br></br></br></br></br></br>
+
+<section id="personne">
+
+<h2>Liste du personnel</h2>
+<a href="index.php?ctrl=Personnes&action=addPerson">Nouveau</a>  
+>>>>>>> f5767191c46b0595c35695a84778409c77939536
 <?php 
 foreach ($arrPersonnes as $arrPersonne){
                         $objPersonne = new personne_class();
@@ -21,4 +30,4 @@ foreach ($arrPersonnes as $arrPersonne){
 
 
 
-
+</section>

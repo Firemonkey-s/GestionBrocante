@@ -9,5 +9,5 @@ INSERT INTO `role` (`RoleId`, `Titre`) VALUES ('6', 'Brocanteur');
 INSERT INTO `personne` (`Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('Barth', 'Serge', '0777777777', 'serge.barth@uha.fr', '1');
 INSERT INTO `personne` (`Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('Paul', 'Boccuse', '065555555', 'paul.bocusse@uha.fr', '2');
 INSERT INTO `personne` (`Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('Sieffert', 'Sylvie', '088888888', 'sylvie.sieffert@mairie.kirchheim.fr', '3');
-INSERT INTO `personne` (`Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('Klump','Gilles', '065453727','gilles.klump@free.fr', '4');
+INSERT INTO `personne` (`Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('Klumpp','Gilles', '065453727','gilles.klumpp@free.fr', '4');
 INSERT INTO `personne` (`Nom`, `Prenom`, `Telephone`, `Email`, `RoleId`) VALUES ('Dupont','Henri','0745637388','henri.dupont@free.fr', '4');
