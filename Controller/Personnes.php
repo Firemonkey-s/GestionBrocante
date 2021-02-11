@@ -1,38 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@Firemonkey-s 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-Firemonkey-s
-/
-GestionBrocante
-0
-01
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-GestionBrocante/Controller/Personnes.php /
-@Firemonkey-s
-Firemonkey-s carto
-Latest commit 14cefbc 2 hours ago
- History
- 1 contributor
-61 lines (51 sloc)  1.86 KB
-  
 <?php
 
     class Personnes
