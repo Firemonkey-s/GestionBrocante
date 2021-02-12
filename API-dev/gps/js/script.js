@@ -1,26 +1,62 @@
 let mymap; // Variable qui permettra de stocker la carte
 let marqueur; // Variable qui permettra de stocker le nouveau marqueur
+let cercle; // Variable qui permettra de stocker le nouveau marqueur
+
+let UpdateMarqueur; // Variable qui permettra de stocker l'dentifiant du marqueue en mouvement 
 
 let TableauEmplacements; // tableau des emplacement 
-let TableauMarqueur = [];// Variable qui permettra de stocker les marqueur
-let icone = []; // Variable qui permettra de stocker les icone des marqueur
+let TableauMarqueur = [];// Variable qui permettra de stocker les marqueurs
+let TableauCercle = [];// Variable qui permettra de stocker les marqueurs
+let icone = []; // Variable qui permettra de stocker les icone des marqueurs
 let villes
+
+var stamen // PanelContrôle
 
 // On attend que le DOM soit chargé
 window.onload = () => {
     
     // Nous initialisons la carte et nous la centrons sur la mairie 
-    mymap = L.map('detailsMap').setView([48.61015, 7.49662], 17)
+    mymap = L.map('Map').setView([48.61015, 7.49662], 17);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
     //L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
         attribution: 'Carte fournie par OpenStreetMap.fr',
-        minZoom: 16,
-        maxZoom: 20
+        minZoom: 12,
+        maxZoom: 20,
+        //layers: [OpenStreetMap_BlackAndWhite],
+        //layers: [stamen], //// PanelContrôle      Gestion du panneau de contrôle
     }).addTo(mymap);
+
+    // on ajoute l'echel de la carte 
+    var scale = L.control.scale(); 
+    scale.addTo(mymap); 
+    
+    // on ajoute la fonstion de recherche sur la carte
+    var searchControl = L.esri.Geocoding.geosearch({
+        title:"Recherche de localisation"   
+        ,placeholder: "Recherche de lieux ou d’adresses"
+        }).addTo(mymap);
+    var searcResults = L.layerGroup().addTo(mymap);
+
+    searchControl.on('results', function (data) {
+        searcResults.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+            const searchResult = data.results[i].latlng;
+            const searchMarker = L.marker(searchResult)
+            searcResults.addLayer(searchMarker);
+          
+            document.querySelector("#lat").value = searchResult.lat;
+            document.querySelector("#lon").value = searchResult.lng;
+        }
+      });
+
+
+
+
+    // fin fonstion de recherche sur la carte
 
      // On écoute le clic sur la carte et on lance la fonction "mapClickListen"
      mymap.on('click', mapClickListen);
-
+    
     // JPP cree une liste de marqueur pour Mairie / entre / parking / toilette / restoration / zone 1-4-*
     // On personnalise le marqueur 
 //    var icone = L.icon({
@@ -43,13 +79,43 @@ window.onload = () => {
             iconAnchor: [12, 41],
             popupAnchor: [0, -41]
         });
-        var icone1 = L.icon({
-           iconUrl: "images/marker-icon1.png",
-           iconSize: [25, 41],
-           iconAnchor: [12, 41],
-           popupAnchor: [0, -41]
+        var icone1 = L.icon({// Mairie
+           iconUrl: "images/government.png",
+           iconSize: [33, 44],
+           iconAnchor: [16, 44],
+           popupAnchor: [0, -44]
        });
-        var icone2 = L.icon({
+       var icone2 = L.icon({ //Entrée
+        iconUrl: "images/tickets.png",
+        iconSize: [33, 44],
+        iconAnchor: [16, 44],
+        popupAnchor: [0, -44]
+       });
+       var icone3 = L.icon({ //Toilettes
+        iconUrl: "images/employment.png",
+        iconSize: [33, 44],
+        iconAnchor: [16, 44],
+        popupAnchor: [0, -44]
+       });
+       var icone4 = L.icon({ //Poste de secours
+        iconUrl: "images/health-medical.png",
+        iconSize: [33, 44],
+        iconAnchor: [16, 44],
+        popupAnchor: [0, -44]
+       });
+       var icone5 = L.icon({ //Parking
+        iconUrl: "images/automotive.png",
+        iconSize: [33, 44],
+        iconAnchor: [16, 44],
+        popupAnchor: [0, -44]
+       });
+       var icone6 = L.icon({ //Restaurantion
+        iconUrl: "images/restaurants.png",
+        iconSize: [33, 44],
+        iconAnchor: [16, 44],
+        popupAnchor: [0, -44]
+       });
+        var icone20 = L.icon({
             iconUrl: "images/marker-icon2.png",
             iconSize: [25, 41],
             iconAnchor: [12, 41],
@@ -57,74 +123,58 @@ window.onload = () => {
         });
    // on met les icone dans un tableau
   // icones={icone,icone1,icone2};
-   icones=[icone,icone1,icone2];
+   icones=[icone,icone1,icone2,icone3,icone4,icone5,icone6,icone2,icone2,icone2,icone2,icone2,icone2,icone2,icone2,icone2,icone2,icone2,icone2,icone2,icone2];
+
+   ////// PanelContrôle Gestion du panneau de contrôle
+   var info = L.control();   
+   info.onAdd  = function name(mymap) {
+       this._div = L.DomUtil.create('div','CartePanelContrôle');
+       this._div.innerHTML += '<div style="text-align:center;"><span style="font-size:18px;">Points d\'intérêt</span><br /><span style="color:grey;font-size:14px;">(ville d\'Issy-Les-Moulineaux)</span></div>';
+       this._div.innerHTML += '<hr/>';
+       this._div.innerHTML += '<label for="zone">Type d element  .</label>';
+       this._div.innerHTML += '<select name="zone" id="zone"><option value="1">Mairie</option><option value="2">Entrée</option><option value="3">Toilettes</option><option value="4">Poste de secours</option><option value="5">Parking</option><option value="6">Restaurantion</option><option value="11">Zone 1</option><option value="12">Zone 2</option><option value="13">Zone 3</option><option value="13">Zone 4</option></select>';
+       this._div.innerHTML += '<div><label for="name">Nom</label><input type="text" name="name" id="name"></div>';
+       this._div.innerHTML += '<hr/>';
+       this._div.innerHTML += '<div><label for="lat">.Latitude </label><input type="text" name="lat" id="lat" readonly></div>';
+       this._div.innerHTML += '<div><label for="lon">Longitude </label><input type="text" name="lon" id="lon" readonly></div>';
+       this._div.innerHTML += '<hr/>';
+       this._div.innerHTML += '<button name="save"  onclick="SavePoint()">Enregistrer</button>';
+//       this._div.innerHTML += '<hr/>';
+       return this._div;
+   }
+   //info.addTo(mymap);
+
+//   var map = new L.Map("map", {
+//    center: new L.LatLng(48.825, 2.27),
+//    zoom: 15,
+//    layers: [OpenStreetMap_BlackAndWhite],
+//});
    
-    // lire les information de la base de donne en AJAX 
-    let donnees; // les donne a retourner 
-    let xmlhttp_Get = new XMLHttpRequest();
-    // on definut l'URL de L'API et on l'appel
-    xmlhttp_Get.open("GET","http://192.168.0.7/demo/osm/api/brocante/liste.php"); // JPPserveur 
-    xmlhttp_Get.send(null);
 
-    xmlhttp_Get.onreadystatechange = () =>{
-      // La transaction est terminée ?
-      if(xmlhttp_Get.readyState==4){ 
-        // Si la transaction est un succès
-        if(!(xmlhttp_Get.status ==200)){
-            // On affiche le code d'erreur deans la console 
-            console.log(xmlhttp.statusText);
-        }else{
-            // On traite les données reçues
-            donnees = JSON.parse (xmlhttp_Get.responseText); // deserialisees les donnees
-            // rendre les donner reutilisable 
-            TableauEmplacements = donnees.emplacement;
+//   stamen = new L.StamenTileLayer("toner-lite");
+//   var command = L.control({position: 'topright'});//  topleft
+//   command.onAdd = function (map) { mymap
+//       var div = L.DomUtil.create('div', 'command');
+//       div.innerHTML += '<div style="text-align:center;"><span style="font-size:18px;">Points d\'intérêt</span><br /><span style="color:grey;font-size:14px;">(ville d\'Issy-Les-Moulineaux)</span></div>';
+// //       for (var i = 0; i < cats.length; i++) {
+// //           div.innerHTML += '<form><input id="' + cats[i]["id"] + '" type="checkbox"/>' + cats[i]["label"] + '</form>';
+//div.innerHTML += '<form><input id="1" type="checkbox"/> Hello Word </form>';
+// //       }
+//       return div;
+//   };
+//   command.addTo(mymap);
 
-            //gestion de l'affichage des emplacament 
-            if(TableauEmplacements != null){
-                // On boucle sur les données (ES8)
-                //Object.entries(TableauEmplacements).forEach(emplacement => {
-                // Ici j'ai un seul emplacement
-                //    console.table(emplacement);
-                    //TableauMarqueur[]
-                //})
-                console.log("********  for --- de l'affichage des emplacament ***********");
-                for(var i=0 ; i<TableauEmplacements.length; i++){
-                    var emplacement = TableauEmplacements[i];
-                    // Ici j'ai un seul emplacement et je le rajoute dans un tableau de marqueur 
-                    TableauMarqueur[i] = L.marker([emplacement.lat,emplacement.lon],{
-                        icon: icones[emplacement.zone]//.alt="totot"
-                        //,title = "totot"
-                        //,dragstart(mapClickDragstart)
-                        ,draggable: true
-                    }).addTo(mymap);
-                    TableauMarqueur[i].bindPopup("<p>"+emplacement.nom+"<p>")
-                    
-/// dell                    console.log("*******************************************************");
-/// dell                   console.log(i)
-/// dell                   console.table(emplacement);
-/// dell               console.log("==================================================================");
-/// dell               console.table(TableauMarqueur);
-                }
-            }
-            // fin gestion de l'affichage des emplacament
-            donnees = donnees.emplacement;
-            console.log("********  fin gestion de l'affichage des emplacament ***********")
-            
-           //S console.table(donnees); //.emplacement verifie les donnees serialisees
-            console.table(TableauEmplacements); //.emplacement verifie les donnees serialisees
-            console.log("********  func API 3 ***********")
-            //return donnees//.emplacement;
-         }
-      }
-    } 
-    
+
+
+  ////// PanelContrôle Gestion du panneau de contrôle fin
+  APIGetEmplacementAll();
     
     /////////////////////////////////////////
    console.log("********  MAIN 0 ***********");
    console.table(TableauEmplacements); //.emplacement verifie les donnees serialisees
    console.log("********  MAIN 1 ***********");  
 
-
+//jppDell
 
    // totototot=3
     villes = {
@@ -189,7 +239,7 @@ window.onload = () => {
    
 
     // rechercher le gps par l'adresser 
-    document.querySelector("#adresse").addEventListener("blur",getCity);
+    //document.querySelector("#adresse").addEventListener("blur",getCity);
 
     var marqueurs = L.markerClusterGroup();
 
@@ -197,7 +247,7 @@ window.onload = () => {
                 // On parcourt les différentes villes
                 for(ville in villes){
                     // On crée le marqueur et on lui attribue une popup
-                    var marqueur = L.marker([villes[ville].lat, villes[ville].lon], {
+                    var _marqueur = L.marker([villes[ville].lat, villes[ville].lon], {
                         icon: icone//},{
                         // On rend le marqueur déplaçable
                         ,draggable: true
@@ -205,7 +255,7 @@ window.onload = () => {
                         }
                     );
 
-                    marqueur.on('dragend', function(e) {
+                    _marqueur.on('dragend', function(e) {
                         console.log(e)
                         pos = e.target.getLatLng();
                         document.querySelector("#lat").value=pos.lat;
@@ -213,8 +263,8 @@ window.onload = () => {
                     });
                          //.addTo(mymap); Inutile lors de l'utilisation des clusters
  //                   var marqueur = L.marker([villes[ville].lat, villes[ville].lon]); //.addTo(mymap); Inutile lors de l'utilisation des clusters
-                    marqueur.bindPopup("<p>"+ville+"</p>");
-                    marqueurs.addLayer(marqueur); // On ajoute le marqueur au groupe
+                    _marqueur.bindPopup("<p>"+ville+"</p>");
+                    marqueurs.addLayer(_marqueur); // On ajoute le marqueur au groupe
     
                     // On ajoute le marqueur au tableau
                     tableauMarqueurs.push(marqueur);
@@ -264,29 +314,54 @@ console.log(e)
  */
 function addMarker(pos){
   //  let marqueur = L.marker(pos) sera declare en variable global
-
+   // const zone
     // On vérifie si le marqueur existe déjà
     if (marqueur != undefined) {
         // Si oui, on le retiresS
         mymap.removeLayer(marqueur);
     }
-
-    // On crée le marqueur aux coordonnées "pos"
-    marqueur = L.marker(
-        pos,  {
-            // On rend le marqueur déplaçable
-            draggable: true
-        }
-    )
-
+    if (cercle != undefined) {
+        // Si oui, on le retiresS
+        mymap.removeLayer(cercle);
+    }
+    if (document.querySelector("#zone").value<10) {
+        marqueur = L.marker(
+            pos,  {
+                // On rend le marqueur déplaçable
+                draggable: true
+                ,title:  "tototot"
+                //,alt: "itititti"
+            }
+        ); 
     // On écoute le glisser/déposer et on met à jour les coordonnées
-    marqueur.on('dragend', function(e) {
-        pos = e.target.getLatLng();
-        document.querySelector("#lat").value=pos.lat;
-        document.querySelector("#lon").value=pos.lng;
-    });
-    // On ajoute le marqueur
-    marqueur.addTo(mymap)
+        marqueur.on('dragend', function(e) {
+        // marqueur.on('drag', function(e) {
+            pos = e.target.getLatLng();
+            document.querySelector("#lat").value=pos.lat;
+            document.querySelector("#lon").value=pos.lng;
+        });
+        // On ajoute le marqueur
+       marqueur.addTo(mymap);
+    } else {
+        cercle = L.circle( pos, {
+            draggable: true,
+            color: 'red',
+            fillColor: 'red',
+            fillOpacity: 0.5,
+            radius: 2.5,
+            alt: "New Cercle "
+        });
+    
+    // On crée le marqueur aux coordonnées "pos"
+        cercle.on('dragend', function(e) {
+        // marqueur.on('drag', function(e) {
+            pos = e.target.getLatLng();
+            document.querySelector("#lat").value=pos.lat;
+            document.querySelector("#lon").value=pos.lng;
+        });
+        // On ajoute le marqueur
+        cercle.addTo(mymap);
+    }
 }
 
 
@@ -350,7 +425,9 @@ function getCity(){
     let donnees // les donne a retourner 
     let xmlhttp_Get = new XMLHttpRequest();
     // on definut l'URL de L'API et on l'appel
-    xmlhttp_Get.open("GET","http://192.168.0.7/demo/osm/api/brocante/liste.php"); // JPPserveur 
+    // ici on rand l'URL unique en rajoutant l'instant du clique (ts corespond à time stamp)
+ //   xmlhttp_Get.open("GET","http://192.168.0.7/demo/osm/api/brocante/liste.php?ts="+ new Date().getTime()); // JPPserveur 
+    xmlhttp_Get.open("GET","/api/brocante/liste.php?ts="+ new Date().getTime()); // JPPserveur 
     xmlhttp_Get.send(null);
 
     xmlhttp_Get.onreadystatechange = () =>{
@@ -364,11 +441,68 @@ function getCity(){
             // On traite les données reçues
             donnees = JSON.parse (xmlhttp_Get.responseText); // deserialisees les donnees
             TableauEmplacements = donnees.emplacement;
+            
+            if(TableauEmplacements != null){
+                console.log("*** Fonction *****  for --- de l'affichage des emplacament ***********");
+            
+                // On boucle sur les données (ES8)
+                for (let index = 0; index < TableauEmplacements.length; index++) {
+                    var emplacement = TableauEmplacements[index];
+                    if(emplacement.zone<10){
+                    // Ici j'ai un seul emplacement et je le rajoute dans un tableau de marqueur 
+                    TableauMarqueur[index] = L.marker([emplacement.lat,emplacement.lon],{
+                        icon: icones[emplacement.zone]//.alt="totot"
+                        //,id: emplacement.id
+                        //,title = "totot"
+                        //,dragstart(mapClickDragstart)
+                        ,draggable:  true //false
+                    }).addTo(mymap);
+                    TableauMarqueur[index].bindPopup("<p>"+emplacement.nom+"<p>");
+                    // pour L'Update
+                    TableauMarqueur[index].on('dragstart', function(e) {
+                        UpdateMarqueur = e.target.getLatLng();
+                        document.querySelector("#name").value=UpdateMarqueur;
+                    });
+                    TableauMarqueur[index].on('drag', function(e) {
+                        pos = e.target.getLatLng();
+                        document.querySelector("#lat").value=pos.lat;
+                        document.querySelector("#lon").value=pos.lng;
+                    });
+                    TableauMarqueur[index].on('dragend', UpDatePoint);
+                    
+                   // function(e) {
+                   //     pos = e.target.getLatLng();
+                   //     document.querySelector("#lat").value=pos.lat;
+                   //     document.querySelector("#lon").value=pos.lng;
+                   // });
+                    
+                    // pour la supressionS
+                    TableauMarqueur[index].on('dblclick', DellPoint);
+
+                    // down / dragstart / predrag / drag / dragend	
+                    // click / dblclick / mousedown / mouseup / mouseover / mouseout / mousemove / contextmenu / keypress / keydown / keyup / preclick 
+                    }else{
+                        TableauCercle[index] = L.circle( [emplacement.lat,emplacement.lon], {
+                            draggable: true,
+                            color: 'red',
+                            fillColor: 'red',
+                            fillOpacity: 0.5,
+                            radius: 2.5,
+                            title: emplacement.nom
+                        }).addTo(mymap);
+                        TableauCercle[index].bindPopup("<p>"+emplacement.nom+"<p>");
+                        TableauCercle[index].bindTooltip(emplacement.nom);
+                    }
+                }
+
+            }else{
+
+            }
 
             donnees = donnees.emplacement;
             console.log("********  func API 2 ***********")
             
-            console.table(donnees); //.emplacement verifie les donnees serialisees
+            //console.table(donnees); //.emplacement verifie les donnees serialisees
             console.table(TableauEmplacements); //.emplacement verifie les donnees serialisees
             console.log("********  func API 3 ***********")
             //return donnees//.emplacement;
@@ -377,6 +511,217 @@ function getCity(){
     }    
  }
 
+
+/**
+ * Save  emplacement
+ */
+function SavePoint() {
+     // On vérifie si les champs sont vide
+     if(true){
+        // On crée un objet JS pour le message
+        let donnees = {};  
+        donnees["nom"] = document.querySelector("#name").value ;
+        donnees["zone"] = document.querySelector("#zone").value;
+        donnees["lat"] = document.querySelector("#lat").value;
+        donnees["lon"] = document.querySelector("#lon").value;
+
+
+       // donnees["emplacement"] = emplacement;
+        //donnees[""] = emplacement;   
+        console.log("----donnees-----");
+        console.log(donnees);
+        // On convertit les données en json
+        let donneesJson = JSON.stringify(donnees);
+        //let donneesJson = JSON.stringify(emplacement);
+        console.log("----donneesJson-----");
+        console.log(donneesJson);
+
+        // On envoie les données en POST en Ajax
+        // On instancie XMLHttpRequest
+        let xmlhttp = new XMLHttpRequest();
+
+        // On gère la réponse
+        xmlhttp.onreadystatechange = function(){
+            // on verifie si la requelle est teminer (4) puis le statue 
+            if(this.readyState == 4){
+                //console.log("---------------------------------- \n retour serveur  code Status : " +this.status );
+                //console.log(this.response);
+                if (this.status == 201) {
+                    // l'emregistrment a fontionner 
+                    // On a une réponseZ
+                    // On efface le champ texte
+                    APIGetEmplacementAll();
+
+                }else{
+                    
+                    let response = JSON.parse(this.response);
+                    alert(response.message)
+                    
+                }
+            }
+        }
+
+        // On ouvre la() requête 
+       // xmlhttp.open("POST","http://192.168.0.7/demo/osm/api/brocante/creer.php");
+        xmlhttp.open("POST","/api/brocante/creer.php");
+
+        // On envoie la requête avec les données
+        xmlhttp.send(donneesJson);
+     }
+}
+
+function UpDatePoint(e) {
+        const pos = e.target.getLatLng();
+        let donnees = {};
+        // donnees["id"] = 31; todoJPP
+//        donnees["nom"] = document.querySelector("#name").value ;
+//        donnees["zone"] = document.querySelector("#zone").value;
+        donnees["old_lat"] = UpdateMarqueur.lat.toString();
+        donnees["old_lon"] = UpdateMarqueur.lng.toString();
+        //les nouvelle coordonnees
+        donnees["lat"] = pos.lat.toString();
+        donnees["lon"] = pos.lng.toString();
+
+        console.log(donnees);
+    if (!confirm('Voullez vous Metre a jour le marqueur ')) {
+        console.log('V V V - le marqueur n est pas Mise a jour.');
+        // On récupère les coordonnées du clic
+        pos = e.latlng
+        console.log(pos)
+        
+        // On affiche les coordonnées dans le formulaire
+        document.querySelector("#lat").value=pos.lat
+        document.querySelector("#lon").value=pos.lng
+    } else {
+        console.log('X X X - le marqueur va etre pas Mise a jour.');
+
+     // On vérifie si les champs sont vide
+    // if(true){
+        // On crée un objet JS pour le message
+         
+
+
+
+
+
+
+       // donnees["emplacement"] = emplacement;
+        //donnees[""] = emplacement;   
+        console.log("----donnees-----");
+        console.log(donnees);
+        // On convertit les données en json
+        let donneesJson = JSON.stringify(donnees);
+        //let donneesJson = JSON.stringify(emplacement);
+        console.log("----donneesJson-----");
+        console.log(donneesJson);
+
+        // On envoie les données en POST en Ajax
+        // On instancie XMLHttpRequest
+        let xmlhttp = new XMLHttpRequest();
+
+        // On gère la réponse
+        xmlhttp.onreadystatechange = function(){
+            // on verifie si la requelle est teminer (4) puis le statue 
+            if(this.readyState == 4){
+                console.log("---------------------------------- \n retour serveur  code Status : " +this.status );
+                console.log(this.response);
+                if (this.status == 201) {
+                    // l'emregistrment a fontionner 
+                    // On a une réponseZ
+                    // On efface le champ texte
+                    APIGetEmplacementAll();
+
+                }else{
+                    let response = JSON.parse(this.response);
+                    alert(response.message)           
+                }
+            }
+        }
+        // On ouvre la() requête 
+//        xmlhttp.open("PUT","http://192.168.0.7/demo/osm/api/brocante/modifier.php");
+        xmlhttp.open("PUT","/api/brocante/modifier.php");
+        // On envoie la requête avec les données
+        xmlhttp.send(donneesJson);
+     }
+}
+
+function DellPoint(e) {
+    console.log(e)
+        if (!confirm('Voullez vous suprimer le marqueur ')) {
+            console.log('V V V - le marqueur est conserver.');
+            // On récupère les coordonnées du clic
+            pos = e.latlng
+            console.log(pos)
+            
+            // On affiche les coordonnées dans le formulaire
+            document.querySelector("#lat").value=pos.lat
+            document.querySelector("#lon").value=pos.lng
+        } else {
+            console.log('X X X - le marqueur est suprimer.');
+                
+   
+//    var emplacement = {
+//        nom: document.querySelector("#name").value,
+//        zone: document.querySelector("#zone").value,
+//        lat: document.querySelector("#lat").value,
+//        lon: document.querySelector("#lon").value
+//     }; 
+
+     // On vérifie si les champs sont vide
+     if(true){
+        // On crée un objet JS pour le message
+        let donnees = {}; 
+       donnees["lat"] = e.latlng.lat.toString();
+       donnees["lon"] = e.latlng.lng.toString();
+       // donnees["id"] = 31;
+
+
+       // donnees["emplacement"] = emplacement;
+        //donnees[""] = emplacement;   
+        console.log("----donnees-----");
+        console.log(donnees);
+        // On convertit les données en json
+        let donneesJson = JSON.stringify(donnees);
+        //let donneesJson = JSON.stringify(emplacement);
+        console.log("----donneesJson-----");
+        console.log(donneesJson);
+        console.table(donneesJson);
+
+
+        // On envoie les données en POST en Ajax
+        // On instancie XMLHttpRequest
+        let xmlhttp = new XMLHttpRequest();
+
+        // On gère la réponse
+        xmlhttp.onreadystatechange = function(){
+            // on verifie si la requelle est teminer (4) puis le statue 
+            if(this.readyState == 4){
+                console.log("---------------------------------- \n retour serveur  code Status : " +this.status );
+                console.log(this.response);
+                if (this.status == 201) {
+                    // la supression  a fontionner 
+                    
+                    // on referchie la carte
+                    APIGetEmplacementAll();
+
+                }else{
+                    
+                    let response = JSON.parse(this.response);
+                    alert(response.message)
+                    
+                }
+            }
+        }
+
+        // On ouvre la() requête 
+//        xmlhttp.open("DELETE","http://192.168.0.7/demo/osm/api/brocante/supprimer.php");
+        xmlhttp.open("DELETE","/api/brocante/supprimer.php");
+        // On envoie la requête avec les données
+        xmlhttp.send(donneesJson);
+     }
+
+        }
+    }
 
 
  /**

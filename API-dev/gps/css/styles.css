@@ -1,3 +1,31 @@
-#detailsMap{
-    height: 800px;
+#Map{
+    height: 100vh; /*85vh; 900px; */
 }
+
+
+.CartePanelContrôle {
+    padding: 16px 18px;
+    font: 24px/26px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.CartePanelContrôle h5 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+#query {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: white;
+    padding: 1em;
+  }
+
+  #query select {
+    font-size: 16px;
+  }

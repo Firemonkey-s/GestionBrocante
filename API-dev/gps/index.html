@@ -5,11 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>OpenStreetMap</title>
+
+        <link rel="stylesheet" href="https://www.datavis.fr/assets/css/bootstrap.min.css">
     <!--    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/> -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
         
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+
+  <!-- Load Esri Leaflet Geocoder from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
+    integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+    crossorigin="">
+
+
         <!-- CSS -->
         <link rel="stylesheet" href="css/styles.css">
         <style>
@@ -19,9 +28,9 @@
         </style>
     </head>
     <body>
-        <!-- Remplacer # par votre fichier de traitement du formulaire -->
-<form action="#" method="post">
-    <div>
+        <!-- Remplacer # par votre fichier de traitement du formulaire 
+<form action="#" method="post">-->
+  <!--  <div>
         <label for="adresse">Adresse</label>
         <input type="text" name="adresse" id="adresse">
     </div>
@@ -33,33 +42,98 @@
         <label for="ville">Ville</label>
         <input type="text" name="ville" id="ville">
     </div>
+    <div>
+        <label for="Type d'element"></label>
+        <select name="toto">
+            <option value="1">Mairie</option>
+            <option value="2">Entrée</option>
+            <option value="3">Toilettes</option>
+            <option value="4">Poste de secours</option>
+            <option value="5">Parking</option>
+            <option value="6">Restaurantion</option>
+            <option value="11">Zone 1</option>
+            <option value="12">Zone 2</option>
+            <option value="13">Zone 3</option>
+            <option value="13">Zone 4</option>
+        </select>
+    </div>-->
+    <!-- Cette DIV Saffichera sur la carte -->
 
+    <div id="query" class="leaflet-bar">
+        <p>
+            <label>
+              Type d element:
+              <select id="zone">
+            <option value="1">Mairie</option>
+            <option value="2">Entrée</option>
+            <option value="3">Toilettes</option>
+            <option value="4">Poste de secours</option>
+            <option value="5">Parking</option>
+            <option value="6">Restaurantion</option>
+            <option value="11">Zone 1</option>
+            <option value="12">Zone 2</option>
+            <option value="13">Zone 3</option>
+            <option value="13">Zone 4</option>
+              </select>
+            </label>
+         </p>
+        <p>      
+            <label for="name">Nom </label> <input type="text" name="name" id="name">
+        </p>
+        <hr/>
+        <p>
+            <div><label for="lat">Latitude </label><input type="text" name="lat" id="lat" readonly></div>'
+        </p>
+        <p>
+            <label for="lon">Longitude </label><input type="text" name="lon" id="lon" readonly>
+        </p>
+        <hr/>
+        </p>
+            <button name="save"  onclick="SavePoint()">Enregistrer</button>
+        <p>
+
+      </div>
     <!-- Cette DIV affichera la carte -->
-    <div id="detailsMap"></div>
+    <div id="Map"></div>
 
     <!-- Les champs ci-dessous afficheront la latitude et la longitude -->
-    <div>
-        <label for="lat">Latitude</label>
-        <input type="text" name="lat" id="lat" readonly>
-    </div>
-    <div>
-        <label for="lon">Longitude</label>
-        <input type="text" name="lon" id="lon" readonly>
-    </div>
+    <!--<div><label for="lat">Latitude</label><input type="text" name="lat" id="lat" readonly></div>
+    <div><label for="lon">Longitude</label><input type="text" name="lon" id="lon" readonly></div>
     <button>Valider</button>
-</form>
-<!--
+
+</form>-->
+<!-- 201
         <div id="maCarte"></div>-->
 
         <!-- Fichiers Javascript -->
         <!--<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script> -->
          <!-- Make sure you put this AFTER Leaflet's CSS -->
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+ <!--  -->      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         
         <!-- Fichiers Javascript pour la marqueur  -->
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
-        <script src="js/script.js"></script>
+          <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.5.3/dist/esri-leaflet.js"
+  integrity="sha512-K0Vddb4QdnVOAuPJBHkgrua+/A9Moyv8AQEWi0xndQ+fqbRfAFd47z4A9u1AW/spLO0gEaiE1z98PK1gl5mC5Q=="
+  crossorigin=""></script>
+
+<!-- Load Esri Leaflet Geocoder from CDN -->
+
+<script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
+  integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
+  crossorigin=""></script>
+
+
+ <!--
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+-->
+
+        <!-- rendre le metier accync metier de l'application -->
+       <!--  <script src="js/npmjs/script.min.js"+ new Date().getTime())></script>
+        metier de l'application -->
+        <script src="js/script.js"+ new Date().getTime())></script>
     </body>
 </html>
 
@@ -70,6 +144,14 @@
         https://nouvelle-techno.fr/actualites/pas-a-pas-inserer-une-carte-openstreetmap-sur-votre-site
         https://www.youtube.com/watch?v=MtY9J2frbsM&feature=emb_logo
 
+
+
+
+        
+        https://www.tutorialspoint.com/leafletjs/leafletjs_discussion.htm
+
+
+        https://maptimeboston.github.io/leaflet-intro/ 
     creation de l'API
         https://nouvelle-techno.fr/actualites/live-coding-creer-une-api-rest
         https://www.youtube.com/watch?v=f5qEXU3btp8&feature=emb_logo
@@ -78,5 +160,8 @@
         https://www.youtube.com/watch?v=ACbSyZyP8zY
     mise em place des marqueur dinamique 
         https://nouvelle-techno.fr/actualites/live-coding-integrer-openstreetmap-a-un-formulaire
+
+
+
 
     -->
